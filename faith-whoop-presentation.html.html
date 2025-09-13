@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faith Nwaubani - Your Growth Catalyst</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        .presentation {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            display: none;
+            width: 95%;
+            max-width: 1200px;
+            height: 90vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            overflow-y: auto;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .slide h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .slide h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #ffd700;
+            border-bottom: 3px solid #ffd700;
+            padding-bottom: 10px;
+        }
+
+        .slide h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #ffed4e;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            color: #e0e0e0;
+        }
+
+        .metrics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .metric-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .metric-box:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: #ffd700;
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .metric-desc {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .case-study-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 5px solid #ffd700;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .case-study-container h3 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        .case-study-container p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+
+        .case-study-container strong {
+            color: #ffd700;
+        }
+
+        .case-study-container ul {
+            margin: 15px 0 15px 20px;
+        }
+
+        .case-study-container li {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: #d0d0d0;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .timeline-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            transform: scale(1.05);
+            border-color: #ffd700;
+        }
+
+        .timeline-card h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .roi-showcase {
+            text-align: center;
+            background: rgba(255, 215, 0, 0.1);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+        }
+
+        .roi-number {
+            font-size: 5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(255, 215, 0, 0.8);
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #ffd700;
+            transform: scale(1.05);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .progress-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 215, 0, 0.8);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            transition: width 0.5s ease;
+            z-index: 1000;
+        }
+
+        .cta-section {
+            background: rgba(255, 215, 0, 0.15);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px;
+                height: 95vh;
+            }
+            
+            .slide h1 {
+                font-size: 2.5rem;
+            }
+            
+            .slide h2 {
+                font-size: 2rem;
+            }
+            
+            .metric-value {
+                font-size: 2rem;
+            }
+            
+            .case-study-container {
+                padding: 20px;
+            }
+        }
+
+        /* Smooth scrolling for slide content */
+        .slide {
+            scrollbar-width: thin;
+            scrollbar-color: #ffd700 transparent;
+        }
+
+        .slide::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .slide::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .slide::-webkit-scrollbar-thumb {
+            background: #ffd700;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="progress-indicator" id="progressIndicator">1 / 11</div>
+
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div style="padding-top: 150px;" class="slide active">
+            <h1>Faith Nwaubani</h1>
+            <div class="subtitle">Your Next Growth Catalyst</div>
+            <div style="text-align: center; font-size: 2rem; color: #ffd700; margin: 2rem 0;">
+                Lifecycle Marketing Manager
+            </div>
+            <div style="text-align: center; font-size: 1.4rem; opacity: 0.8; margin-top: 3rem;">
+                I transform growth through data-driven results.
+            </div>
+        </div>
+
+        <!-- Slide 2: Key Metrics -->
+        <div class="slide">
+            <h2>The Numbers That Matter</h2>
+            <div class="metrics-container">
+                <div class="metric-box">
+                    <div class="metric-value">47%</div>
+                    <div class="metric-desc">Increase in Subscription Acquisition Rates</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">$2.3M</div>
+                    <div class="metric-desc">ARR Growth from my Reactivation Strategies</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">65%</div>
+                    <div class="metric-desc">Improvement in Customer Lifetime Value</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">156%</div>
+                    <div class="metric-desc">Increase in Referral Program Participation</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">38%</div>
+                    <div class="metric-desc">Reduction in Churn Rate through my interventions</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">12x</div>
+                    <div class="metric-desc">ROI on Lifecycle Marketing Spend under my leadership</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Case Study 1 -->
+        <div class="slide">
+            <h2>Case Study 1</h2>
+            <div class="case-study-container">
+                <h3>Complete Infrastructure Transformation</h3>
+                <p><strong>The Situation:</strong> A rapidly growing SaaS platform was hemorrhaging customers at 32% monthly churn while new acquisition had completely stagnated, creating an unsustainable death spiral that threatened the entire business model.</p>
+                
+                <p><strong>My Strategic Intervention:</strong></p>
+                <p>Didn't just patch the problem but completely reimagined their customer lifecycle approach. By diving deep into behavioural analytics, I discovered that customers were churning not because of product issues, but because they never experienced the platform's core value within their first 30 days.</p>
+                
+                <p><strong>My Execution Framework:</strong></p>
+                <ul>
+                    <li><strong>Predictive Intelligence:</strong> Worked with the data team to build machine learning models analyzing 47 behavioral signals to predict churn risk 21 days in advance</li>
+                    <li><strong>Intervention Automation:</strong> Created trigger-based campaigns that automatically engaged at-risk users with personalized value demonstrations</li>
+                    <li><strong>Progressive Onboarding:</strong> Redesigned the user journey with milestone-based achievements that increased feature adoption by 156%</li>
+                    <li><strong>Advocacy Amplification:</strong> Turned satisfied customers into growth engines through referral programs that drove 13% acquisition increase</li>
+                </ul>
+                
+                <div class="metrics-container" style="margin-top: 2rem;">
+                    <div class="metric-box">
+                        <div class="metric-value">44%</div>
+                        <div class="metric-desc">Churn Reduction (32% → 18%)</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">13%</div>
+                        <div class="metric-desc">New Subscriber Growth</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">$1.8M</div>
+                        <div class="metric-desc">Annualized Revenue Impact</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Case Study 2 -->
+        <div class="slide">
+            <h2>Case Study 2 </h2>
+            <div class="case-study-container">
+                <h3>Strategic Card Adoption Revolution</h3>
+                <p><strong>The Challenge:</strong> Despite having a robust digital platform, physical card adoption was dismally low. Customers not using cards. Repeat usage was moderate.</p>
+                
+                <p><strong>The Findings:</strong></p>
+                <p>Rather than launching generic card promotions, I did a little research on customers who hadn't used their cards. Customers fell into distinct behavioural segments that required completely different approaches.<br><br>- Some had cards but hadn't activated them. <br>- Some requested cards but never received them. <br>- While others who needed cards weren't even asking.</p>
+                <p><strong>The Segmentation Breakthrough:</strong></p>
+                <ul>
+                    <li><strong>The Never-Askers:</strong> Identified 23,000+ users who'd never requested cards despite having payment history indicating 'high card usage potential'</li>
+                    <li><strong>The Lost Requesters:</strong> Found 8,400 customers who'd requested cards 30+ days ago but never received them—immediate escalation to cards team</li>
+                    <li><strong>The Payment Validators:</strong> Used transaction history to identify customers who regularly made payments, indicating financial engagement and card readiness</li>
+                    <li><strong>Cross-Team Coordination:</strong> Established direct communication protocols with the cards team to resolve fulfillment bottlenecks in real-time</li>
+                </ul>
+                
+                <p><strong>The Multi-Channel Execution:</strong></p>
+                <p>I created targeted campaigns for each segment. 'What is in it for them' content like cross-border payments, card control to avoid auto debit or to avoid card declining fee, for never-askers. <br><br>Escalation protocols for lost requesters, and premium card benefits messaging for high-value customers. The result was a 73% increase in meaningful card engagement.</p>
+                
+                <div class="metrics-container">
+                    <div class="metric-box">
+                        <div class="metric-value">73%</div>
+                        <div class="metric-desc">Card Request Conversion Increase</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">3,429</div>
+                        <div class="metric-desc">Lost Requests Successfully Resolved</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">45%</div>
+                        <div class="metric-desc">Fulfillment Process Improvement</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Case Study 3 -->
+        <div class="slide">
+            <h2>Case Study 3</h2>
+            <div class="case-study-container">
+                <h3>Driving Transaction on Dormant Accounts</h3>
+                <p><strong>The Problem:</strong> Thousands of customers had funded their accounts but were sitting idle. Money was there, intent was unclear, and the business was missing massive transaction volume opportunities. These "funded but not transacting" accounts represented untapped potential worth millions. While at a potential risk to churn.</p>
+                
+                <p><strong>Segmentation and Behavioural Approach:</strong></p>
+                <p>Instead of generic "please transact" messages, I looked deeper to spot opportunity gaps and/or loopholes. For low hanging fruits, I segmented into 2 segments, and pushed it with an ongoing weekly promo that made customers who had ₦5,000 in their accounts and performed a transaction, eligible for a raffle draw to win monetary and non-monetary rewards. <br><br>- Segment 1 were customers with ₦5,000. <br>- Segment 2 were customers with less than ₦5,000. <br><br>This insight became the foundation for a revolutionary segmentation strategy.</p>
+
+                <p><strong>The Strategy:</strong></p>
+                <ul>
+                    <li><strong>Account Balance with ₦5,000:</strong> Low-risk transaction incentives messaging.</li>
+                    <li><strong>Lower-Balance Segment (<₦5,000):</strong> "You're ₦1000 away from participating today" messaging with encouragement to reach the ₦5,000 threshold.</li>
+                    <li><strong>Time-Sensitive Triggers:</strong> Identified optimal engagement windows—customers who hadn't transacted in 14, 30, and 60-day ranges received different urgency levels and messaging</li>
+                    <li><strong>Value Demonstration:</strong> Created scenario-based content showing exactly how transactions would benefit each segment's specific situation</li>
+                </ul>
+                
+                <p><strong>The Psychological Triggers:</strong></p>
+                <p>Funded accounts indicated intent but required confidence building. I crafted campaigns that addressed common transaction hesitations while providing clear value propositions tailored to each customer's demonstrated financial behaviour, previous buyer history.</p>
+
+                <div class="metrics-container">
+                    <div class="metric-box">
+                        <div class="metric-value">67%</div>
+                        <div class="metric-desc">Dormant Account Activation Rate</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">₦2.8M</div>
+                        <div class="metric-desc">Additional Transaction Volume</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">52%</div>
+                        <div class="metric-desc">Higher-Value Segment Success</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Case Study 4 -->
+        <div class="slide">
+            <h2>Case Study 4</h2>
+            <div class="case-study-container">
+                <h3>Membership Platform Resurrection</h3>
+                <p><strong>The Crisis:</strong> A membership platform was in decline with reactivation rates plummeting to just 12%, while family plan adoption—critical for long-term value—remained stubbornly low. The business model was fundamentally broken, with acquisition costs far exceeding reactivation investment.</p>
+                
+                <p><strong>Systematic Revival Strategy:</strong></p>
+                <p>I approached this like a medical diagnosis, analyzing why members left and what would bring them back. I discovered that generic win-back campaigns were actually driving people further away. The solution required precision in targeting and deeply personalizing value propositions.</p>
+                
+                <p><strong>The Reactivation Science:</strong></p>
+                <ul>
+                    <li><strong>Behavioural Archaeology:</strong> Analyzed past member activity to identify "reactivation DNA", i.e. specific patterns that predicted successful returns with 84% accuracy</li>
+                    <li><strong>Emotional Journey Mapping:</strong> Created campaigns addressing why members left (value perception, life changes, competitive alternatives) rather than just promoting features</li>
+                    <li><strong>Progressive Value Delivery:</strong> Designed comeback experiences that immediately demonstrated enhanced value within first 48 hours of reactivation</li>
+                    <li><strong>Family Network Expansion:</strong> Built referral systems that turned individual reactivations into household adoptions, multiplying lifetime value</li>
+                </ul>
+                
+                <p><strong>The Family Plan Revolution:</strong></p>
+                <p>I recognized that family plans weren't selling because they were positioned as "more expensive" rather than "more valuable per person." I restructured messaging around shared experiences, cost-per-member savings, and household health goals, resulting in a 127% conversion increase.</p>
+
+                <p><strong>The Compound Effect:</strong></p>
+                <p>By combining predictive reactivation with family expansion, I created a growth flywheel where every reactivated member became a potential advocate for 2-3 additional family memberships, exponentially increasing customer lifetime value.</p>
+
+                <div class="metrics-container">
+                    <div class="metric-box">
+                        <div class="metric-value">158%</div>
+                        <div class="metric-desc">Reactivation Rate Improvement</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">127%</div>
+                        <div class="metric-desc">Family Plan Conversion Growth</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">$3.2M</div>
+                        <div class="metric-desc">Recovered Annual Revenue</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Technical Excellence -->
+        <div class="slide">
+            <h2>Technical Excellence</h2>
+            <div class="metrics-container">
+                <div class="metric-box">
+                    <div class="metric-value">73%</div>
+                    <div class="metric-desc">Improvement in Campaign Targeting Accuracy</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">52%</div>
+                    <div class="metric-desc">Faster Data Processing After CRM Migration</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">24</div>
+                    <div class="metric-desc">Hours/Week Freed Up Through Automation</div>
+                </div>
+            </div>
+            <div class="case-study-container">
+                <h3>Platform & Analytics Mastery</h3>
+                <ul>
+                    <li><strong>CRM Optimization:</strong> Optimized systems resulting in 52% faster data processing</li>
+                    <li><strong>Predictive Models:</strong> Built targeting accuracy improvements of 73% through advanced segmentation</li>
+                    <li><strong>Process Automation:</strong> Automated 18 manual processes, freeing strategic capacity</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 8: What Faith Will Deliver -->
+        <div class="slide">
+            <h2>What Faith Will Deliver</h2>
+            <div class="timeline-grid">
+                <div class="timeline-card">
+                    <h3>Month 1-3: Foundation</h3>
+                    <ul>
+                        <li>Audit and identify up to $500K+ revenue opportunities</li>
+                        <li>Up to 15-20% immediate performance lift</li>
+                        <li>Advanced tracking implementation</li>
+                    </ul>
+                </div>
+                <br>
+                <div class="timeline-card">
+                    <h3>Month 4-6: Acceleration</h3>
+                    <ul>
+                        <li>Up to 25% churn reduction campaigns</li>
+                        <li>Up to 30% LTV increase optimization</li>
+                        <li>Up to 40% membership growth scaling</li>
+                    </ul>
+                </div>
+                <br>
+                <div class="timeline-card">
+                    <h3>Month 7-12: Market Leadership</h3>
+                    <ul>
+                        <li>Up to $3M+ ARR impact achievement</li>
+                        <li>Top-quartile performance positioning</li>
+                        <li>Up to 2x growth capacity systems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Growth Formula -->
+        <div class="slide">
+            <h2>Your Growth Formula</h2>
+            <div style="text-align: center; font-size: 1.8rem; margin: 3rem 0; color: #e0e0e0;">
+                Data Analysis → Strategic Segmentation → Automated Execution → Continuous Optimization → <span style="color: #ffd700; font-weight: bold;">Measurable Growth</span>
+            </div>
+            <div class="metrics-container">
+                <div class="metric-box">
+                    <div class="metric-value">$4.2M</div>
+                    <div class="metric-desc">Additional ARR in Year 1</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">35%</div>
+                    <div class="metric-desc">Improvement in Key Lifecycle Metrics</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">60%</div>
+                    <div class="metric-desc">Increase in Marketing Efficiency & ROI</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Investment Case -->
+        <div class="slide">
+            <h2>The Investment Case</h2>
+            <div class="metrics-container" style="margin: 3rem 0;">
+                <div class="metric-box">
+                    <div class="metric-desc">Annual Investment</div>
+                    <div class="metric-value">~$150K</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-desc">Projected ARR Impact</div>
+                    <div class="metric-value">$4.2M</div>
+                </div>
+            </div>
+            <div class="roi-showcase">
+                <div class="roi-number">2,800%</div>
+                <div style="font-size: 1.5rem; margin-top: 1rem; color: #e0e0e0;">Return on Investment</div>
+                <p style="font-size: 1.3rem; margin-top: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Faith doesn't just execute lifecycle marketing, she combines data with technical sophistication, strategic vision, and execution excellence to deliver measurable business impact from day one.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Call to Action -->
+        <div class="slide">
+            <h1></h1>
+            <div style="text-align: center; font-size: 1.8rem; margin: 3rem 0; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <p><br><br><br><br></p>
+            </div>
+            <div class="cta-section">
+                <h3>Let's discuss how you can accelerate growth</h3>
+                <p style="font-size: 1.3rem; margin-top: 2rem;">
+                    Send an email to a.faithnwaubani@gmail.com
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            
+            document.getElementById('progressIndicator').textContent = `${currentSlide + 1} / ${totalSlides}`;
+            document.getElementById('progressBar').style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            const newSlide = currentSlide + direction;
+            if (newSlide >= 0 && newSlide < totalSlides) {
+                currentSlide = newSlide;
+                updateSlide();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                changeSlide(1);
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                changeSlide(-1);
+            }
+        });
+
+        // Initialize
+        updateSlide();
+
+        // Add hover effects to metric boxes
+        document.querySelectorAll('.metric-box').forEach(box => {
+            box.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
