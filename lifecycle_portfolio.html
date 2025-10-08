@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifecycle Marketing Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 40px;
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 60px;
+            margin-top: 60px;
+            justify-content: center;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .meta-value {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        /* Problem Section */
+        .problem {
+            background: #111;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin-top: 60px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #ee5a6f);
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* Journey Map Section */
+        .journey {
+            background: #0d0d0d;
+        }
+
+        .journey-container {
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .journey-stages {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .journey-stages::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .stage {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .stage-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border: 4px solid #0d0d0d;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stage-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .stage-desc {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        /* Email Wireframe Section */
+        .wireframes {
+            background: #161616;
+        }
+
+        .email-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .email-card {
+            background: #1e1e1e;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .email-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        .email-preview {
+            background: #fff;
+            padding: 30px;
+            min-height: 400px;
+            position: relative;
+        }
+
+        .email-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 80px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .email-content-line {
+            background: #e0e0e0;
+            height: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .email-content-line.short {
+            width: 70%;
+        }
+
+        .email-cta {
+            background: #667eea;
+            height: 50px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .email-meta {
+            padding: 25px;
+        }
+
+        .email-day {
+            font-size: 0.85rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .email-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .email-desc {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        /* Results Section */
+        .results {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d1b3d 100%);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .result-card {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .result-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .result-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .result-sublabel {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: 8px;
+        }
+
+        /* Strategy Section */
+        .strategy {
+            background: #0a0a0a;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin-top: 60px;
+        }
+
+        .strategy-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #2a2a3e;
+        }
+
+        .strategy-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .strategy-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .strategy-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .strategy-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .strategy-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #667eea;
+            transform: scale(1.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .alias-note {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Dots -->
+    <div class="nav">
+        <div class="nav-dot active" onclick="scrollToPage(0)"></div>
+        <div class="nav-dot" onclick="scrollToPage(1)"></div>
+        <div class="nav-dot" onclick="scrollToPage(2)"></div>
+        <div class="nav-dot" onclick="scrollToPage(3)"></div>
+        <div class="nav-dot" onclick="scrollToPage(4)"></div>
+        <div class="nav-dot" onclick="scrollToPage(5)"></div>
+    </div>
+
+    <!-- Hero Page -->
+    <div class="page hero">
+        <div class="alias-note">*All names and data use aliases</div>
+        <h1>Welcome Series Redesign</h1>
+        <p class="subtitle">Transforming new user onboarding for Nexus SaaS</p>
+        
+        <div class="project-meta">
+            <div class="meta-item">
+                <div class="meta-label">Client</div>
+                <div class="meta-value">Nexus SaaS (Alias)</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Duration</div>
+                <div class="meta-value">3 Months</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Role</div>
+                <div class="meta-value">Lifecycle Marketing Manager</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Industry</div>
+                <div class="meta-value">B2B SaaS</div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">↓</div>
+    </div>
+
+    <!-- Problem Page -->
+    <div class="page problem">
+        <h2 class="section-title">The Problem</h2>
+        <p style="max-width: 800px; text-align: center; opacity: 0.8; font-size: 1.2rem; line-height: 1.8;">
+            Nexus SaaS was experiencing significant drop-off in their trial-to-paid conversion. 
+            Their welcome series was outdated, generic, and failing to guide users through key activation moments.
+        </p>
+
+        <div class="problem-grid">
+            <div class="stat-card">
+                <div class="stat-number">23%</div>
+                <div class="stat-label">Trial-to-Paid Conversion Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">62%</div>
+                <div class="stat-label">Day 7 Churn Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8%</div>
+                <div class="stat-label">Email Engagement Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Generic Emails in Series</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Journey Map Page -->
+    <div class="page journey">
+        <h2 class="section-title">Redesigned Customer Journey</h2>
+        <p style="max-width: 900px; text-align: center; opacity: 0.8; font-size: 1.1rem; line-height: 1.8; margin: 0 auto;">
+            I mapped the entire trial experience and identified 7 critical touchpoints where personalized 
+            communication could drive activation and prevent churn.
+        </p>
+
+        <div class="journey-container">
+            <div class="journey-stages">
+                <div class="stage">
+                    <div class="stage-icon">👋</div>
+                    <div class="stage-title">Welcome</div>
+                    <div class="stage-desc">Instant gratification + Quick win setup</div>
+                </div>
+                <div class="stage">
+                    <div class="stage-icon">🎯</div>
+                    <div class="stage-title">Activation</div>
+                    <div class="stage-desc">Guide to first core feature usage</div>
+                </div>
+                <div class="stage">
+                    <div class="stage-icon">💡</div>
+                    <div class="stage-title">Education</div>
+                    <div class="stage-desc">Use case specific tutorials</div>
+                </div>
+                <div class="stage">
+                    <div class="stage-icon">🚀</div>
+                    <div class="stage-title">Value Realization</div>
+                    <div class="stage-desc">Show impact + ROI proof</div>
+                </div>
+                <div class="stage">
+                    <div class="stage-icon">💬</div>
+                    <div class="stage-title">Engagement</div>
+                    <div class="stage-desc">Community + Support touchpoints</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Wireframes Page -->
+    <div class="page wireframes">
+        <h2 class="section-title">The 7-Email Welcome Series</h2>
+        <p style="max-width: 900px; text-align: center; opacity: 0.8; font-size: 1.1rem; line-height: 1.8; margin: 0 auto 20px;">
+            Each email was designed with a specific behavioral trigger and activation goal
+        </p>
+
+        <div class="email-grid">
+            <div class="email-card">
+                <div class="email-preview">
+                    <div class="email-header"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-content-line short"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-cta"></div>
+                </div>
+                <div class="email-meta">
+                    <div class="email-day">Day 0 - Immediate</div>
+                    <div class="email-title">Welcome & Quick Start</div>
+                    <div class="email-desc">Personalized setup based on signup data. One clear CTA to first value moment.</div>
+                </div>
+            </div>
+
+            <div class="email-card">
+                <div class="email-preview">
+                    <div class="email-header"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-content-line short"></div>
+                    <div class="email-cta"></div>
+                </div>
+                <div class="email-meta">
+                    <div class="email-day">Day 1</div>
+                    <div class="email-title">First Feature Deep-Dive</div>
+                    <div class="email-desc">Video tutorial + use case examples relevant to their industry vertical.</div>
+                </div>
+            </div>
+
+            <div class="email-card">
+                <div class="email-preview">
+                    <div class="email-header"></div>
+                    <div class="email-content-line short"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-cta"></div>
+                </div>
+                <div class="email-meta">
+                    <div class="email-day">Day 3</div>
+                    <div class="email-title">Integration Power-Up</div>
+                    <div class="email-desc">Connect their existing tools. Shows time-saving automation possibilities.</div>
+                </div>
+            </div>
+
+            <div class="email-card">
+                <div class="email-preview">
+                    <div class="email-header"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-content-line short"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-cta"></div>
+                </div>
+                <div class="email-meta">
+                    <div class="email-day">Day 5</div>
+                    <div class="email-title">Success Stories</div>
+                    <div class="email-desc">Social proof from similar companies. Specific metrics and outcomes.</div>
+                </div>
+            </div>
+
+            <div class="email-card">
+                <div class="email-preview">
+                    <div class="email-header"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-content-line short"></div>
+                    <div class="email-cta"></div>
+                </div>
+                <div class="email-meta">
+                    <div class="email-day">Day 7</div>
+                    <div class="email-title">Progress Check-In</div>
+                    <div class="email-desc">Personalized usage stats. Encouragement + next steps recommendation.</div>
+                </div>
+            </div>
+
+            <div class="email-card">
+                <div class="email-preview">
+                    <div class="email-header"></div>
+                    <div class="email-content-line short"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-cta"></div>
+                </div>
+                <div class="email-meta">
+                    <div class="email-day">Day 10</div>
+                    <div class="email-title">Advanced Features Unlock</div>
+                    <div class="email-desc">Power user tips. Exclusive training webinar invitation.</div>
+                </div>
+            </div>
+
+            <div class="email-card">
+                <div class="email-preview">
+                    <div class="email-header"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-content-line"></div>
+                    <div class="email-content-line short"></div>
+                    <div class="email-cta"></div>
+                </div>
+                <div class="email-meta">
+                    <div class="email-day">Day 14</div>
+                    <div class="email-title">Trial End Conversion</div>
+                    <div class="email-desc">Value recap. Limited-time upgrade incentive. Easy upgrade path.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Strategy Page -->
+    <div class="page strategy">
+        <h2 class="section-title">Strategic Approach</h2>
+
+        <div class="strategy-grid">
+            <div class="strategy-card">
+                <div class="strategy-icon">🎯</div>
+                <div class="strategy-title">Segmentation Logic</div>
+                <ul class="strategy-list">
+                    <li>Company size (1-10, 11-50, 51-200, 200+)</li>
+                    <li>Industry vertical (6 key segments)</li>
+                    <li>Use case identified at signup</li>
+                    <li>Behavioral triggers (feature usage, inactivity)</li>
+                    <li>Engagement level scoring</li>
+                </ul>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-icon">🔄</div>
+                <div class="strategy-title">Automation & Triggers</div>
+                <ul class="strategy-list">
+                    <li>Behavioral email triggers based on product usage</li>
+                    <li>Dynamic content blocks per segment</li>
+                    <li>A/B testing on subject lines & CTAs</li>
+                    <li>Automated pause if user becomes active</li>
+                    <li>Win-back branch for inactive users</li>
+                </ul>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-icon">📊</div>
+                <div class="strategy-title">Success Metrics Tracked</div>
+                <ul class="strategy-list">
+                    <li>Email open rates & click-through rates</li>
+                    <li>Feature activation rates per email</li>
+                    <li>Time-to-activation improvement</li>
+                    <li>Trial-to-paid conversion rate</li>
+                    <li>Day 7, 14, 30 retention rates</li>
+                </ul>
+            </div>
+
+            <div class="strategy-card">
+                <div class="strategy-icon">💡</div>
+                <div class="strategy-title">Key Innovations</div>
+                <ul class="strategy-list">
+                    <li>Personalized video thumbnails with user data</li>
+                    <li>In-email interactive elements (polls, calculators)</li>
+                    <li>Dynamic progress bars showing trial completion</li>
+                    <li>Smart send time optimization per user</li>
+                    <li>Cross-channel sync with in-app messaging</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Page -->
+    <div class="page results">
+        <h2 class="section-title">The Results</h2>
+        <p style="max-width: 800px; text-align: center; opacity: 0.8; font-size: 1.2rem; line-height: 1.8; margin: 0 auto 20px;">
+            Within 90 days of launching the new welcome series, we saw dramatic improvements across all key metrics
+        </p>
+
+        <div class="results-grid">
+            <div class="result-card">
+                <div class="result-icon">📈</div>
+                <div class="result-number">+67%</div>
+                <div class="result-label">Trial Conversion</div>
+                <div class="result-sublabel">23% → 38%</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">💌</div>
+                <div class="result-number">+142%</div>
+                <div class="result-label">Email Engagement</div>
+                <div class="result-sublabel">8% → 19.4% CTR</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">⚡</div>
+                <div class="result-number">-52%</div>
+                <div class="result-label">Time to Activation</div>
+                <div class="result-sublabel">6.2 → 3 days avg</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">🎯</div>
+                <div class="result-number">-31%</div>
+                <div class="result-label">Day 7 Churn</div>
+                <div class="result-sublabel">62% → 43%</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">💰</div>
+                <div class="result-number">$284K</div>
+                <div class="result-label">Additional ARR</div>
+                <div class="result-sublabel">First quarter impact</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">🔥</div>
+                <div class="result-number">+89%</div>
+                <div class="result-label">Feature Adoption</div>
+                <div class="result-sublabel">Core features usage</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">⭐</div>
+                <div class="result-number">4.7/5</div>
+                <div class="result-label">NPS Improvement</div>
+                <div class="result-sublabel">+1.3 point increase</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">🚀</div>
+                <div class="result-number">3.2x</div>
+                <div class="result-label">ROI</div>
+                <div class="result-sublabel">Campaign investment</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToPage(index) {
+            const pages = document.querySelectorAll('.page');
+            pages[index].scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Update active nav dot on scroll
+        window.addEventListener('scroll', () => {
+            const pages = document.querySelectorAll('.page');
+            const navDots = document.querySelectorAll('.nav-dot');
+            
+            let current = 0;
+            pages.forEach((page, index) => {
+                const rect = page.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                    current = index;
+                }
+            });
+
+            navDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === current);
+            });
+        });
+    </script>
+</body>
+</html>

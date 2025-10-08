@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positioning Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 40px;
+            position: relative;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            letter-spacing: -4px;
+            line-height: 1;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero .subtitle {
+            font-size: 1.7rem;
+            opacity: 0.95;
+            margin-bottom: 50px;
+            max-width: 900px;
+            line-height: 1.5;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+            margin-top: 60px;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .hero-stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Section Styles */
+        .section-title {
+            font-size: 3.8rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: -2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            opacity: 0.75;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto 70px;
+            line-height: 1.8;
+        }
+
+        /* Market Context */
+        .market {
+            background: #0d0d0d;
+        }
+
+        .market-overview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            max-width: 1300px;
+            margin-bottom: 70px;
+        }
+
+        .market-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 50px;
+            border-radius: 24px;
+            border: 1px solid #2a2a3e;
+        }
+
+        .market-card-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #4facfe;
+        }
+
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .stat-box {
+            background: rgba(79, 172, 254, 0.1);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(79, 172, 254, 0.2);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4facfe;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Competitor Analysis */
+        .competitors {
+            background: #111;
+        }
+
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .competitor-card {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            padding: 45px 35px;
+            border-radius: 24px;
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .competitor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #ee5a6f);
+        }
+
+        .competitor-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .competitor-tagline {
+            font-size: 1.05rem;
+            opacity: 0.7;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: #4facfe;
+        }
+
+        .competitor-section {
+            margin-bottom: 25px;
+        }
+
+        .competitor-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ff6b6b;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .competitor-content {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        .gap-highlight {
+            background: rgba(255, 107, 107, 0.15);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #ff6b6b;
+            margin-top: 20px;
+        }
+
+        .gap-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #ff6b6b;
+            margin-bottom: 8px;
+        }
+
+        .gap-text {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+
+        /* Target Audience */
+        .audience {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 45px;
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .persona-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 50px;
+            border-radius: 24px;
+            border: 2px solid rgba(79, 172, 254, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .persona-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .persona-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .persona-info {
+            flex: 1;
+        }
+
+        .persona-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .persona-role {
+            font-size: 1.1rem;
+            opacity: 0.7;
+            color: #4facfe;
+        }
+
+        .persona-section {
+            margin-bottom: 30px;
+        }
+
+        .persona-section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #4facfe;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .persona-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .persona-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        .persona-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #4facfe;
+            font-weight: 700;
+        }
+
+        .persona-quote {
+            background: rgba(79, 172, 254, 0.1);
+            padding: 25px;
+            border-radius: 16px;
+            border-left: 4px solid #4facfe;
+            font-style: italic;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-top: 20px;
+        }
+
+        /* Positioning Strategy */
+        .positioning {
+            background: #0a0a0a;
+        }
+
+        .positioning-framework {
+            max-width: 1200px;
+            margin-top: 60px;
+        }
+
+        .framework-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px;
+            border-radius: 24px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+        }
+
+        .framework-label {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .framework-content {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        .positioning-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 35px;
+            margin-top: 40px;
+        }
+
+        .positioning-element {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+
+        .element-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #4facfe;
+            margin-bottom: 20px;
+        }
+
+        .element-content {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+
+        /* Messaging Pillars */
+        .messaging {
+            background: #0d0d0d;
+        }
+
+        .pillars-container {
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .pillar-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 50px;
+            border-radius: 24px;
+            border: 1px solid #2a2a3e;
+            margin-bottom: 40px;
+        }
+
+        .pillar-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 35px;
+        }
+
+        .pillar-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+        }
+
+        .pillar-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        .pillar-item {
+            background: rgba(79, 172, 254, 0.05);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(79, 172, 254, 0.15);
+        }
+
+        .pillar-item-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4facfe;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .pillar-item-text {
+            font-size: 1rem;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        /* Value Prop Canvas */
+        .value-prop {
+            background: #111;
+        }
+
+        .canvas {
+            max-width: 1400px;
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .canvas-side {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            padding: 50px;
+            border-radius: 24px;
+            border: 1px solid #333;
+        }
+
+        .canvas-side.customer {
+            border-top: 5px solid #ff6b6b;
+        }
+
+        .canvas-side.product {
+            border-top: 5px solid #4facfe;
+        }
+
+        .canvas-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .canvas-section {
+            margin-bottom: 35px;
+        }
+
+        .canvas-section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .canvas-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .canvas-list li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            opacity: 0.85;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        .canvas-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .canvas-side.customer .canvas-list li::before {
+            color: #ff6b6b;
+        }
+
+        .canvas-side.product .canvas-list li::before {
+            color: #4facfe;
+        }
+
+        /* Message Architecture */
+        .architecture {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d1b3d 100%);
+        }
+
+        .message-hierarchy {
+            max-width: 1000px;
+            margin-top: 60px;
+        }
+
+        .message-level {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 45px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .message-level-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #4facfe;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .message-level-content {
+            font-size: 1.8rem;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .message-level.headline .message-level-content {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .message-variations {
+            margin-top: 60px;
+        }
+
+        .variation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .variation-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .variation-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4facfe;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .variation-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        /* Channel Strategy */
+        .channels {
+            background: #0a0a0a;
+        }
+
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .channel-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 45px;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .channel-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .channel-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+        }
+
+        .channel-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .channel-strategy {
+            font-size: 1.05rem;
+            opacity: 0.9;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .channel-examples {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .channel-examples-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            opacity: 0.8;
+        }
+
+        .channel-examples-list {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        /* Results */
+        .results {
+            background: #0d0d0d;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid #2a2a3e;
+            text-align: center;
+        }
+
+        .result-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .result-label {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            margin-bottom: 8px;
+        }
+
+        .result-detail {
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        .results-story {
+            max-width: 1200px;
+            margin-top: 70px;
+            background: rgba(79, 172, 254, 0.1);
+            padding: 50px;
+            border-radius: 24px;
+            border: 1px solid rgba(79, 172, 254, 0.2);
+        }
+
+        .results-story-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #4facfe;
+        }
+
+        .results-story-text {
+            font-size: 1.15rem;
+            opacity: 0.85;
+            line-height: 1.8;
+        }
+
+        /* Testing */
+        .testing {
+            background: #111;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1300px;
+            margin-top: 60px;
+        }
+
+        .test-card {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            padding: 45px;
+            border-radius: 24px;
+            border: 1px solid #333;
+        }
+
+        .test-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #4facfe;
+        }
+
+        .test-variants {
+            display: grid;
+            gap: 20px;
+        }
+
+        .variant {
+            background: rgba(79, 172, 254, 0.05);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(79, 172, 254, 0.15);
+        }
+
+        .variant-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4facfe;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .variant-text {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .variant-result {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .variant-metric {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .variant-winner {
+            background: rgba(76, 217, 100, 0.2);
+            color: #4cd964;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #4facfe;
+            transform: scale(1.3);
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.6);
+        }
+
+        .alias-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(79, 172, 254, 0.2);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(79, 172, 254, 0.4);
+            backdrop-filter: blur(10px);
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+    <div class="alias-badge">*All data uses aliases</div>
+
+    <!-- Navigation -->
+    <div class="nav">
+        <div class="nav-dot active" onclick="scrollToPage(0)"></div>
+        <div class="nav-dot" onclick="scrollToPage(1)"></div>
+        <div class="nav-dot" onclick="scrollToPage(2)"></div>
+        <div class="nav-dot" onclick="scrollToPage(3)"></div>
+        <div class="nav-dot" onclick="scrollToPage(4)"></div>
+        <div class="nav-dot" onclick="scrollToPage(5)"></div>
+        <div class="nav-dot" onclick="scrollToPage(6)"></div>
+        <div class="nav-dot" onclick="scrollToPage(7)"></div>
+        <div class="nav-dot" onclick="scrollToPage(8)"></div>
+        <div class="nav-dot" onclick="scrollToPage(9)"></div>
+    </div>
+
+    <!-- Hero -->
+    <div class="page hero">
+        <h1>Strategic Positioning<br>& Messaging Framework</h1>
+        <p class="subtitle">Repositioning Atlas Analytics from "another analytics tool" to "the decision intelligence platform for growth teams" — driving 312% increase in qualified pipeline</p>
+        
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-number">312%</div>
+                <div class="hero-stat-label">Pipeline Growth</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">4 Months</div>
+                <div class="hero-stat-label">Time to Market</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">87%</div>
+                <div class="hero-stat-label">Message Recall</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Market Context -->
+    <div class="page market">
+        <h2 class="section-title">Market Context & Challenge</h2>
+        <p class="section-subtitle">
+            Atlas Analytics had a powerful product but was drowning in a sea of "analytics platforms." 
+            Despite superior technology, they were losing deals to established competitors with clearer positioning. 
+            The company needed a distinct market position that resonated with their ideal customers.
+        </p>
+
+        <div class="market-overview">
+            <div class="market-card">
+                <div class="market-card-title">The Situation</div>
+                <div class="market-stats">
+                    <div class="stat-box">
+                        <div class="stat-value">52%</div>
+                        <div class="stat-label">Demo-to-Close Rate (Target: 35%)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">8.2</div>
+                        <div class="stat-label">Months Avg Sales Cycle</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">73%</div>
+                        <div class="stat-label">Lost to "Status Quo"</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">~0</div>
+                        <div class="stat-label">Brand Differentiation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-card">
+                <div class="market-card-title">The Core Problem</div>
+                <div class="market-stats">
+                    <div class="stat-box">
+                        <div class="stat-value">200+</div>
+                        <div class="stat-label">Direct Competitors</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">"Meh"</div>
+                        <div class="stat-label">Analyst Feedback</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">41%</div>
+                        <div class="stat-label">Confused by Messaging</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">$0</div>
+                        <div class="stat-label">Unaided Brand Awareness</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Competitor Analysis -->
+    <div class="page competitors">
+        <h2 class="section-title">Competitive Landscape Analysis</h2>
+        <p class="section-subtitle">
+            I conducted deep competitive intelligence on 12 key players, analyzing their positioning, messaging, 
+            customer perception, and market gaps. This revealed a critical whitespace opportunity.
+        </p>
+
+        <div class="competitor-grid">
+            <div class="competitor-card">
+                <div class="competitor-name">DataPulse</div>
+                <div class="competitor-tagline">"Analytics for Everyone"</div>
+                
+                <div class="competitor-section">
+                    <div class="competitor-label">Positioning</div>
+                    <div class="competitor-content">
+                        All-in-one analytics platform. Broad feature set targeting SMBs to enterprise. 
+                        Self-serve model with democratization focus.
+                    </div>
+                </div>
+
+                <div class="competitor-section">
+                    <div class="competitor-label">Strengths</div>
+                    <div class="competitor-content">
+                        Strong brand recognition, extensive integrations, large user community, 
+                        competitive pricing, easy onboarding.
+                    </div>
+                </div>
+
+                <div class="gap-highlight">
+                    <div class="gap-title">Opportunity Gap</div>
+                    <div class="gap-text">Too generic. Lacks depth for sophisticated growth teams. "Everyone" positioning means no one feels it's built for them.</div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-name">InsightPro</div>
+                <div class="competitor-tagline">"Enterprise Intelligence Platform"</div>
+                
+                <div class="competitor-section">
+                    <div class="competitor-label">Positioning</div>
+                    <div class="competitor-content">
+                        Enterprise-grade data warehouse with advanced ML. Targets Fortune 500 with complex 
+                        data infrastructure needs.
+                    </div>
+                </div>
+
+                <div class="competitor-section">
+                    <div class="competitor-label">Strengths</div>
+                    <div class="competitor-content">
+                        Powerful infrastructure, security certifications, dedicated CS, handles massive scale, 
+                        comprehensive data governance.
+                    </div>
+                </div>
+
+                <div class="gap-highlight">
+                    <div class="gap-title">Opportunity Gap</div>
+                    <div class="gap-text">Overcomplicated and expensive for mid-market. 6+ month implementation. Growth teams need speed, not enterprise bureaucracy.</div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-name">GrowthMetrics</div>
+                <div class="competitor-tagline">"Marketing Analytics Done Right"</div>
+                
+                <div class="competitor-section">
+                    <div class="competitor-label">Positioning</div>
+                    <div class="competitor-content">
+                        Marketing attribution and campaign analytics. Focused on CMOs and demand gen teams. 
+                        Channel performance tracking.
+                    </div>
+                </div>
+
+                <div class="competitor-section">
+                    <div class="competitor-label">Strengths</div>
+                    <div class="competitor-content">
+                        Deep marketing integrations, beautiful dashboards, attribution modeling, 
+                        ROI calculator, marketer-friendly UX.
+                    </div>
+                </div>
+
+                <div class="gap-highlight">
+                    <div class="gap-title">Opportunity Gap</div>
+                    <div class="gap-text">Siloed to marketing only. Growth teams need cross-functional insights (product + sales + marketing). No product analytics.</div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-name">ChartBuilder</div>
+                <div class="competitor-tagline">"Beautiful Data Visualization"</div>
+                
+                <div class="competitor-section">
+                    <div class="competitor-label">Positioning</div>
+                    <div class="competitor-content">
+                        BI and visualization tool. Drag-and-drop dashboard builder. Strong design aesthetic. 
+                        Appeals to data-informed teams.
+                    </div>
+                </div>
+
+                <div class="competitor-section">
+                    <div class="competitor-label">Strengths</div>
+                    <div class="competitor-content">
+                        Intuitive interface, no coding required, fast dashboard creation, 
+                        public sharing, embedded analytics.
+                    </div>
+                </div>
+
+                <div class="gap-highlight">
+                    <div class="gap-title">Opportunity Gap</div>
+                    <div class="gap-text">Visualization focus, not decision-making. Shows what happened, doesn't predict what to do next. No prescriptive insights.</div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-name">ProductSense</div>
+                <div class="competitor-tagline">"Product Analytics for PMs"</div>
+                
+                <div class="competitor-section">
+                    <div class="competitor-label">Positioning</div>
+                    <div class="competitor-content">
+                        Product analytics platform. User behavior tracking, feature adoption, 
+                        funnel analysis. Built for product teams.
+                    </div>
+                </div>
+
+                <div class="competitor-section">
+                    <div class="competitor-label">Strengths</div>
+                    <div class="competitor-content">
+                        Event tracking, cohort analysis, A/B testing, user segmentation, 
+                        retention curves, activation metrics.
+                    </div>
+                </div>
+
+                <div class="gap-highlight">
+                    <div class="gap-title">Opportunity Gap</div>
+                    <div class="gap-text">Product-team only. Growth teams need unified view across acquisition, activation, retention. Doesn't connect to revenue.</div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-name">RevenueIQ</div>
+                <div class="competitor-tagline">"Revenue Operations Platform"</div>
+                
+                <div class="competitor-section">
+                    <div class="competitor-label">Positioning</div>
+                    <div class="competitor-content">
+                        RevOps and sales analytics. Pipeline visibility, forecasting, deal insights. 
+                        CRM-centric with sales focus.
+                    </div>
+                </div>
+
+                <div class="competitor-section">
+                    <div class="competitor-label">Strengths</div>
+                    <div class="competitor-content">
+                        Salesforce integration, sales forecasting, pipeline health, rep performance, 
+                        deal recommendations.
+                    </div>
+                </div>
+
+                <div class="gap-highlight">
+                    <div class="gap-title">Opportunity Gap</div>
+                    <div class="gap-text">Sales-only lens. Growth teams need the full customer lifecycle from acquisition through expansion. No top-of-funnel visibility.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Target Audience -->
+    <div class="page audience">
+        <h2 class="section-title">Target Audience Deep-Dive</h2>
+        <p class="section-subtitle">
+            Rather than targeting "anyone who needs analytics," I identified two specific personas whose pain points 
+            aligned perfectly with Atlas's unique strengths. This focus became the foundation of our positioning.
+        </p>
+
+        <div class="persona-grid">
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar">👨‍💼</div>
+                    <div class="persona-info">
+                        <div class="persona-name">Marcus Chen</div>
+                        <div class="persona-role">VP of Growth, B2B SaaS</div>
+                    </div>
+                </div>
+
+                <div class="persona-section">
+                    <div class="persona-section-title">Demographics</div>
+                    <ul class="persona-list">
+                        <li>35-42 years old, tech-forward company</li>
+                        <li>Responsible for full-funnel growth (acquisition → retention)</li>
+                        <li>Team size: 8-25 people across marketing, sales, product</li>
+                        <li>Company: $5M-$50M ARR, Series A-C funded</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <div class="persona-section-title">Goals & Objectives</div>
+                    <ul class="persona-list">
+                        <li>Hit aggressive growth targets (3x year-over-year)</li>
+                        <li>Optimize every stage of the customer journey</li>
+                        <li>Make data-driven decisions fast (not in quarterly reviews)</li>
+                        <li>Prove ROI of growth investments to CEO/board</li>
+                        <li>Coordinate cross-functional teams around shared metrics</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <div class="persona-section-title">Pain Points</div>
+                    <ul class="persona-list">
+                        <li>Data scattered across 15+ tools (GA, Salesforce, Mixpanel, etc.)</li>
+                        <li>Can't see the full customer journey in one place</li>
+                        <li>Spending more time pulling reports than making decisions</li>
+                        <li>Marketing, product, and sales working off different numbers</li>
+                        <li>By the time they have insights, opportunities are gone</li>
+                    </ul>
+                </div>
+
+                <div class="persona-quote">
+                    "I need to know what's working NOW, not what worked last quarter. 
+                    I'm drowning in dashboards but starving for actionable insights that tell me 
+                    what to actually DO to hit our numbers."
+                </div>
+            </div>
+
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar">👩‍💻</div>
+                    <div class="persona-info">
+                        <div class="persona-name">Priya Sharma</div>
+                        <div class="persona-role">Head of Marketing Operations</div>
+                    </div>
+                </div>
+
+                <div class="persona-section">
+                    <div class="persona-section-title">Demographics</div>
+                    <ul class="persona-list">
+                        <li>30-38 years old, data-savvy marketer</li>
+                        <li>Manages marketing tech stack and analytics</li>
+                        <li>Reports to CMO, partners closely with sales and product</li>
+                        <li>Company: $10M-$100M ARR, growth stage</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <div class="persona-section-title">Goals & Objectives</div>
+                    <ul class="persona-list">
+                        <li>Optimize marketing ROI and prove channel effectiveness</li>
+                        <li>Reduce CAC while increasing conversion rates</li>
+                        <li>Build predictable, scalable growth engine</li>
+                        <li>Enable team to self-serve data without always asking her</li>
+                        <li>Bridge the gap between marketing metrics and revenue</li>
+                    </ul>
+                </div>
+
+                <div class="persona-section">
+                    <div class="persona-section-title">Pain Points</div>
+                    <ul class="persona-list">
+                        <li>Attribution is a black box — can't prove what's working</li>
+                        <li>CMO asks questions she can't answer without a data analyst</li>
+                        <li>Every tool shows different numbers (trust issues)</li>
+                        <li>Campaign performance reports take days to pull together</li>
+                        <li>Can track leads but loses them once they hit sales</li>
+                    </ul>
+                </div>
+
+                <div class="persona-quote">
+                    "I need one source of truth that connects marketing activity to actual revenue. 
+                    I'm tired of exporting CSVs, joining tables, and building Frankenstein dashboards 
+                    just to answer 'which channels are driving pipeline?'"
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Positioning Strategy -->
+    <div class="page positioning">
+        <h2 class="section-title">The New Positioning Strategy</h2>
+        <p class="section-subtitle">
+            Based on competitive gaps and customer needs, I developed a distinct positioning that carved out 
+            a new category: "Decision Intelligence for Growth Teams"
+        </p>
+
+        <div class="positioning-framework">
+            <div class="framework-box">
+                <div class="framework-label">Core Positioning Statement</div>
+                <div class="framework-content">
+                    Atlas Analytics is the decision intelligence platform that helps growth teams at scaling B2B companies 
+                    make faster, smarter decisions across the entire customer journey — from first touch to expansion.
+                </div>
+            </div>
+
+            <div class="positioning-grid">
+                <div class="positioning-element">
+                    <div class="element-title">Category</div>
+                    <div class="element-content">
+                        Decision Intelligence Platform (not just "analytics" — emphasizes actionability and AI-powered recommendations)
+                    </div>
+                </div>
+
+                <div class="positioning-element">
+                    <div class="element-title">Target Audience</div>
+                    <div class="element-content">
+                        Growth teams at scaling B2B SaaS companies ($5M-$100M ARR) who need cross-functional visibility
+                    </div>
+                </div>
+
+                <div class="positioning-element">
+                    <div class="element-title">Key Benefit</div>
+                    <div class="element-content">
+                        Make faster, more confident decisions with unified customer journey intelligence — not just reports
+                    </div>
+                </div>
+
+                <div class="positioning-element">
+                    <div class="element-title">Proof Points</div>
+                    <div class="element-content">
+                        AI-powered insights, automated recommendations, cross-functional dashboards, real-time alerts, unified data model
+                    </div>
+                </div>
+
+                <div class="positioning-element">
+                    <div class="element-title">Key Differentiator</div>
+                    <div class="element-content">
+                        Only platform built specifically for growth teams that connects acquisition, activation, retention, and expansion in one view
+                    </div>
+                </div>
+
+                <div class="positioning-element">
+                    <div class="element-title">Reason to Believe</div>
+                    <div class="element-content">
+                        Built by former growth leaders at unicorn SaaS companies who felt the pain firsthand. Designed for speed, not complexity.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Messaging Pillars -->
+    <div class="page messaging">
+        <h2 class="section-title">Messaging Architecture</h2>
+        <p class="section-subtitle">
+            I developed three core messaging pillars that support the positioning and resonate with our personas' 
+            specific pain points. Each pillar includes supporting proof points and tactical messaging.
+        </p>
+
+        <div class="pillars-container">
+            <div class="pillar-card">
+                <div class="pillar-header">
+                    <div class="pillar-number">01</div>
+                    <div class="pillar-title">Unified Growth Intelligence</div>
+                </div>
+                <div class="pillar-grid">
+                    <div class="pillar-item">
+                        <div class="pillar-item-label">Main Message</div>
+                        <div class="pillar-item-text">
+                            See your entire customer journey in one place — from first click to expansion opportunity.
+                        </div>
+                    </div>
+                    <div class="pillar-item">
+                        <div class="pillar-item-label">Supporting Points</div>
+                        <div class="pillar-item-text">
+                            • Connect all your data sources automatically<br>
+                            • One source of truth for marketing, sales, product<br>
+                            • Cross-functional dashboards everyone trusts
+                        </div>
+                    </div>
+                    <div class="pillar-item">
+                        <div class="pillar-item-label">Pain Point Addressed</div>
+                        <div class="pillar-item-text">
+                            Data scattered across tools. No single view of customer journey. Teams working off different metrics.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-header">
+                    <div class="pillar-number">02</div>
+                    <div class="pillar-title">AI-Powered Decision Making</div>
+                </div>
+                <div class="pillar-grid">
+                    <div class="pillar-item">
+                        <div class="pillar-item-label">Main Message</div>
+                        <div class="pillar-item-text">
+                            Stop drowning in dashboards. Get AI recommendations that tell you exactly what to do next.
+                        </div>
+                    </div>
+                    <div class="pillar-item">
+                        <div class="pillar-item-label">Supporting Points</div>
+                        <div class="pillar-item-text">
+                            • Smart alerts for anomalies and opportunities<br>
+                            • Predictive insights before trends become problems<br>
+                            • Automated action recommendations
+                        </div>
+                    </div>
+                    <div class="pillar-item">
+                        <div class="pillar-item-label">Pain Point Addressed</div>
+                        <div class="pillar-item-text">
+                            Insights come too late. Spending more time analyzing than acting. Can't see what's coming next.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-header">
+                    <div class="pillar-number">03</div>
+                    <div class="pillar-title">Built for Speed, Not Complexity</div>
+                </div>
+                <div class="pillar-grid">
+                    <div class="pillar-item">
+                        <div class="pillar-item-label">Main Message</div>
+                        <div class="pillar-item-text">
+                            Live in 2 weeks, not 6 months. Built for growth teams who need to move fast.
+                        </div>
+                    </div>
+                    <div class="pillar-item">
+                        <div class="pillar-item-label">Supporting Points</div>
+                        <div class="pillar-item-text">
+                            • No SQL required — built for operators<br>
+                            • Pre-built templates for common use cases<br>
+                            • Scales with you from $5M to $100M+ ARR
+                        </div>
+                    </div>
+                    <div class="pillar-item">
+                        <div class="pillar-item-label">Pain Point Addressed</div>
+                        <div class="pillar-item-text">
+                            Enterprise tools too complex. SMB tools too basic. Need something that scales but stays fast.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Value Prop Canvas -->
+    <div class="page value-prop">
+        <h2 class="section-title">Value Proposition Canvas</h2>
+        <p class="section-subtitle">
+            Mapping customer jobs, pains, and gains against our product features and benefits to ensure 
+            perfect alignment between what customers need and what we deliver.
+        </p>
+
+        <div class="canvas">
+            <div class="canvas-side customer">
+                <div class="canvas-title">Customer Profile</div>
+                
+                <div class="canvas-section">
+                    <div class="canvas-section-title">Customer Jobs</div>
+                    <ul class="canvas-list">
+                        <li>Make data-driven growth decisions quickly</li>
+                        <li>Optimize marketing spend and prove ROI</li>
+                        <li>Identify high-value customer segments</li>
+                        <li>Coordinate growth initiatives across teams</li>
+                        <li>Predict and prevent churn before it happens</li>
+                        <li>Scale growth engine predictably</li>
+                    </ul>
+                </div>
+
+                <div class="canvas-section">
+                    <div class="canvas-section-title">Customer Pains</div>
+                    <ul class="canvas-list">
+                        <li>Data scattered across 10+ disconnected tools</li>
+                        <li>Insights arrive too late to act on</li>
+                        <li>Can't see full customer journey in one view</li>
+                        <li>Spending weeks building reports instead of testing</li>
+                        <li>Teams arguing over whose data is "right"</li>
+                        <li>Can't prove which initiatives drive revenue</li>
+                        <li>Attribution models are black boxes</li>
+                    </ul>
+                </div>
+
+                <div class="canvas-section">
+                    <div class="canvas-section-title">Customer Gains</div>
+                    <ul class="canvas-list">
+                        <li>Make confident decisions with real-time data</li>
+                        <li>Spot opportunities and risks automatically</li>
+                        <li>Align entire growth team on shared metrics</li>
+                        <li>Reduce CAC while improving conversion</li>
+                        <li>Prove ROI and get more budget</li>
+                        <li>Scale faster without adding headcount</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="canvas-side product">
+                <div class="canvas-title">Value Map</div>
+                
+                <div class="canvas-section">
+                    <div class="canvas-section-title">Products & Services</div>
+                    <ul class="canvas-list">
+                        <li>Unified customer data platform with 150+ integrations</li>
+                        <li>AI-powered insights and anomaly detection</li>
+                        <li>Cross-functional growth dashboards</li>
+                        <li>Automated reporting and alerts</li>
+                        <li>Predictive models for churn, expansion, LTV</li>
+                        <li>Multi-touch attribution engine</li>
+                    </ul>
+                </div>
+
+                <div class="canvas-section">
+                    <div class="canvas-section-title">Pain Relievers</div>
+                    <ul class="canvas-list">
+                        <li>One-click data unification across all tools</li>
+                        <li>Real-time alerts for anomalies (not weekly reports)</li>
+                        <li>Journey visualization from awareness to advocacy</li>
+                        <li>Pre-built templates = insights in minutes</li>
+                        <li>Single source of truth everyone trusts</li>
+                        <li>Clear ROI tracking to board-level metrics</li>
+                        <li>Transparent, explainable attribution</li>
+                    </ul>
+                </div>
+
+                <div class="canvas-section">
+                    <div class="canvas-section-title">Gain Creators</div>
+                    <ul class="canvas-list">
+                        <li>AI recommendations show exactly what to optimize</li>
+                        <li>Predictive insights catch issues before they happen</li>
+                        <li>Shared dashboards align cross-functional teams</li>
+                        <li>Automated testing suggestions improve efficiency</li>
+                        <li>Board-ready reports in one click</li>
+                        <li>Scales from $5M to $100M+ without breaking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Architecture -->
+    <div class="page architecture">
+        <h2 class="section-title">Message Hierarchy</h2>
+        <p class="section-subtitle">
+            A tiered messaging structure from high-level brand message down to tactical feature messaging, 
+            ensuring consistency across all channels while allowing flexibility for context.
+        </p>
+
+        <div class="message-hierarchy">
+            <div class="message-level headline">
+                <div class="message-level-label">Brand Headline</div>
+                <div class="message-level-content">
+                    Turn data into decisions. Faster.
+                </div>
+            </div>
+
+            <div class="message-level">
+                <div class="message-level-label">Value Proposition</div>
+                <div class="message-level-content">
+                    The decision intelligence platform that helps growth teams make faster, smarter decisions across the entire customer journey.
+                </div>
+            </div>
+
+            <div class="message-level">
+                <div class="message-level-label">Elevator Pitch (30 sec)</div>
+                <div class="message-level-content">
+                    Atlas Analytics is the decision intelligence platform for scaling B2B companies. We unify data from marketing, sales, and product into one view — then use AI to tell you exactly what to optimize next. Growth teams use us to make faster decisions, reduce CAC, and scale predictably.
+                </div>
+            </div>
+
+            <div class="message-level">
+                <div class="message-level-label">Extended Pitch (60 sec)</div>
+                <div class="message-level-content">
+                    Most analytics tools just show you what happened. Atlas tells you what to DO about it. We connect all your growth data — from first click to expansion — and use AI to surface insights you'd never find manually. Smart alerts catch opportunities and risks in real-time. Predictive models show you what's coming. Automated recommendations tell you exactly what to optimize. Built specifically for growth teams at scaling B2B companies who need to move fast without enterprise complexity.
+                </div>
+            </div>
+        </div>
+
+        <div class="message-variations">
+            <h3 class="section-title" style="font-size: 2.5rem; margin-top: 80px;">Message Variations by Channel</h3>
+            
+            <div class="variation-grid">
+                <div class="variation-card">
+                    <div class="variation-label">Homepage Hero</div>
+                    <div class="variation-text">
+                        Stop drowning in dashboards. Start making smarter decisions.
+                    </div>
+                </div>
+
+                <div class="variation-card">
+                    <div class="variation-label">LinkedIn Ad</div>
+                    <div class="variation-text">
+                        Your growth team is wasting 15 hours/week pulling reports. Atlas gives you AI-powered insights in seconds.
+                    </div>
+                </div>
+
+                <div class="variation-card">
+                    <div class="variation-label">Cold Email Subject</div>
+                    <div class="variation-text">
+                        Quick question about [Company]'s growth metrics
+                    </div>
+                </div>
+
+                <div class="variation-card">
+                    <div class="variation-label">G2 Description</div>
+                    <div class="variation-text">
+                        Decision intelligence platform for B2B growth teams. Unify customer data, get AI insights, make faster decisions.
+                    </div>
+                </div>
+
+                <div class="variation-card">
+                    <div class="variation-label">Sales One-Liner</div>
+                    <div class="variation-text">
+                        We help growth teams see their entire customer journey and know exactly what to optimize next.
+                    </div>
+                </div>
+
+                <div class="variation-card">
+                    <div class="variation-label">Investor Pitch</div>
+                    <div class="variation-text">
+                        The decision intelligence category is the next evolution of analytics. We're defining it.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Channel Strategy -->
+    <div class="page channels">
+        <h2 class="section-title">Channel-Specific Positioning</h2>
+        <p class="section-subtitle">
+            How the positioning translates across different channels and touchpoints, with specific tactical guidance 
+            for each to ensure consistent messaging while optimizing for channel-specific best practices.
+        </p>
+
+        <div class="channel-grid">
+            <div class="channel-card">
+                <div class="channel-icon">🌐</div>
+                <div class="channel-name">Website & SEO</div>
+                <div class="channel-strategy">
+                    Lead with problem-first messaging. Target keywords around "growth team analytics," "customer journey platform," "decision intelligence." Use case studies and ROI calculators prominently.
+                </div>
+                <div class="channel-examples">
+                    <div class="channel-examples-title">Key Pages Created:</div>
+                    <div class="channel-examples-list">
+                        • "For Growth Teams" landing page<br>
+                        • "vs. Traditional Analytics" comparison<br>
+                        • Use case: Marketing attribution<br>
+                        • Use case: Churn prediction<br>
+                        • Customer journey intelligence guide
+                    </div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-icon">📱</div>
+                <div class="channel-name">Paid Social (LinkedIn)</div>
+                <div class="channel-strategy">
+                    Speak directly to pain points in ad copy. Use social proof and specificity. Target VP Growth, Head of Marketing Ops, CMO titles. Lead with time savings and ROI proof.
+                </div>
+                <div class="channel-examples">
+                    <div class="channel-examples-title">Top Performing Angles:</div>
+                    <div class="channel-examples-list">
+                        • "15 hours/week back" time savings<br>
+                        • "3 tools in 1" consolidation angle<br>
+                        • Competitor comparison ads<br>
+                        • Customer testimonial video ads<br>
+                        • Interactive ROI calculator
+                    </div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-icon">✉️</div>
+                <div class="channel-name">Email Marketing</div>
+                <div class="channel-strategy">
+                    Segment by persona and stage. For prospects: education and social proof. For customers: feature adoption and best practices. Always lead with value, not product.
+                </div>
+                <div class="channel-examples">
+                    <div class="channel-examples-title">Campaign Series:</div>
+                    <div class="channel-examples-list">
+                        • "Growth team playbook" nurture<br>
+                        • "Decision intelligence" education<br>
+                        • Customer success stories<br>
+                        • Product update positioning<br>
+                        • Event/webinar invitations
+                    </div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-icon">🎤</div>
+                <div class="channel-name">Content Marketing</div>
+                <div class="channel-strategy">
+                    Thought leadership on "decision intelligence" category. Practical guides for growth teams. Data-driven insights. Avoid pure product promotion — establish expertise first.
+                </div>
+                <div class="channel-examples">
+                    <div class="channel-examples-title">Content Pillars:</div>
+                    <div class="channel-examples-list">
+                        • Growth team best practices<br>
+                        • Decision intelligence 101<br>
+                        • Customer journey optimization<br>
+                        • Data-driven growth stories<br>
+                        • Industry benchmarks & research
+                    </div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-icon">🤝</div>
+                <div class="channel-name">Sales Conversations</div>
+                <div class="channel-strategy">
+                    Discovery-first approach. Understand their specific pain points, then position Atlas as the solution. Use customer stories that match their context. Demo focuses on their use case.
+                </div>
+                <div class="channel-examples">
+                    <div class="channel-examples-title">Talk Tracks:</div>
+                    <div class="channel-examples-list">
+                        • "What metrics keep you up at night?"<br>
+                        • "How are you tracking customer journey?"<br>
+                        • "What takes the most time weekly?"<br>
+                        • Case study: Similar company/size<br>
+                        • ROI calculator during demo
+                    </div>
+                </div>
+            </div>
+
+            <div class="channel-card">
+                <div class="channel-icon">🎬</div>
+                <div class="channel-name">Product Demos & Videos</div>
+                <div class="channel-strategy">
+                    Show the "aha moment" within 60 seconds. Lead with the insight, then show how Atlas generated it. Focus on speed and simplicity. Use real customer data (anonymized).
+                </div>
+                <div class="channel-examples">
+                    <div class="channel-examples-title">Video Types:</div>
+                    <div class="channel-examples-list">
+                        • 60-sec "aha moment" product video<br>
+                        • Use case walkthrough series<br>
+                        • Customer testimonial interviews<br>
+                        • "Atlas in 2 minutes" explainer<br>
+                        • Feature-specific demos
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testing & Validation -->
+    <div class="page testing">
+        <h2 class="section-title">Message Testing & Validation</h2>
+        <p class="section-subtitle">
+            I ran systematic A/B tests across multiple channels to validate the positioning and messaging. 
+            Data-driven optimization ensured we landed on messages that actually resonated, not just sounded good internally.
+        </p>
+
+        <div class="test-grid">
+            <div class="test-card">
+                <div class="test-title">Homepage Hero Test</div>
+                <div class="test-variants">
+                    <div class="variant">
+                        <div class="variant-label">Control: Generic</div>
+                        <div class="variant-text">
+                            "Analytics platform for modern businesses"
+                        </div>
+                        <div class="variant-result">
+                            <div class="variant-metric">2.3% conversion to demo request</div>
+                        </div>
+                    </div>
+                    <div class="variant">
+                        <div class="variant-label">Variant A: Problem-First</div>
+                        <div class="variant-text">
+                            "Stop drowning in dashboards. Start making decisions."
+                        </div>
+                        <div class="variant-result">
+                            <div class="variant-metric">4.1% conversion to demo request</div>
+                            <div class="variant-winner">+78% WINNER</div>
+                        </div>
+                    </div>
+                    <div class="variant">
+                        <div class="variant-label">Variant B: Outcome-Focused</div>
+                        <div class="variant-text">
+                            "The decision intelligence platform for growth teams"
+                        </div>
+                        <div class="variant-result">
+                            <div class="variant-metric">3.6% conversion to demo request</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="test-title">LinkedIn Ad Test</div>
+                <div class="test-variants">
+                    <div class="variant">
+                        <div class="variant-label">Control: Feature-Led</div>
+                        <div class="variant-text">
+                            "Unified customer data platform with AI insights and real-time alerts"
+                        </div>
+                        <div class="variant-result">
+                            <div class="variant-metric">1.8% CTR, $147 CPL</div>
+                        </div>
+                    </div>
+                    <div class="variant">
+                        <div class="variant-label">Variant A: Time Savings</div>
+                        <div class="variant-text">
+                            "Your growth team wastes 15 hours/week on reports. Get AI insights in seconds."
+                        </div>
+                        <div class="variant-result">
+                            <div class="variant-metric">3.2% CTR, $89 CPL</div>
+                            <div class="variant-winner">+78% WINNER</div>
+                        </div>
+                    </div>
+                    <div class="variant">
+                        <div class="variant-label">Variant B: Social Proof</div>
+                        <div class="variant-text">
+                            "100+ growth teams switched to Atlas. Here's why."
+                        </div>
+                        <div class="variant-result">
+                            <div class="variant-metric">2.4% CTR, $118 CPL</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="test-title">Email Subject Line Test</div>
+                <div class="test-variants">
+                    <div class="variant">
+                        <div class="variant-label">Control: Direct</div>
+                        <div class="variant-text">
+                            "Introducing Atlas Analytics"
+                        </div>
+                        <div class="variant-result">
+                            <div class="variant-metric">18.2% open rate</div>
+                        </div>
+                    </div>
+                    <div class="variant">
+                        <div class="variant-label">Variant A: Question</div>
+                        <div class="variant-text">
+                            "Still pulling reports manually?"
+                        </div>
+                        <div class="variant-result">
+                            <div class="variant-metric">31.4% open rate</div>
+                            <div class="variant-winner">+73% WINNER</div>
+                        </div>
+                    </div>
+                    <div class="variant">
+                        <div class="variant-label">Variant B: Curiosity</div>
+                        <div class="variant-text">
+                            "The metric your growth team isn't tracking"
+                        </div>
+                        <div class="variant-result">
+                            <div class="variant-metric">27.8% open rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="test-title">Value Proposition Test</div>
+                <div class="test-variants">
+                    <div class="variant">
+                        <div class="variant-label">Control: Comprehensive</div>
+                        <div class="variant-text">
+                            "Complete analytics platform with dashboards, reports, and insights"
+                        </div>
+                        <div class="variant-result">
+                            <div class="variant-metric">38% preference in survey</div>
+                        </div>
+                    </div>
+                    <div class="variant">
+                        <div class="variant-label">Variant A: Decision-Focused</div>
+                        <div class="variant-text">
+                            "Turn data into decisions. Know exactly what to optimize next."
+                        </div>
+                        <div class="variant-result">
+                            <div class="variant-metric">67% preference in survey</div>
+                            <div class="variant-winner">+76% WINNER</div>
+                        </div>
+                    </div>
+                    <div class="variant">
+                        <div class="variant-label">Variant B: Speed-Focused</div>
+                        <div class="variant-text">
+                            "Get insights in minutes, not days. Make decisions in real-time."
+                        </div>
+                        <div class="variant-result">
+                            <div class="variant-metric">54% preference in survey</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div class="page results">
+        <h2 class="section-title">Impact & Results</h2>
+        <p class="section-subtitle">
+            The new positioning transformed Atlas from "just another analytics tool" to a distinct category leader. 
+            Within 6 months, the market responded dramatically.
+        </p>
+
+        <div class="results-grid">
+            <div class="result-card">
+                <div class="result-icon">📈</div>
+                <div class="result-value">+312%</div>
+                <div class="result-label">Qualified Pipeline</div>
+                <div class="result-detail">MQL to SQL conversion</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">⚡</div>
+                <div class="result-value">-41%</div>
+                <div class="result-label">Sales Cycle</div>
+                <div class="result-detail">8.2 → 4.8 months</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">💰</div>
+                <div class="result-value">+187%</div>
+                <div class="result-label">Demo Request Rate</div>
+                <div class="result-detail">Website conversion</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">🎯</div>
+                <div class="result-value">87%</div>
+                <div class="result-label">Message Recall</div>
+                <div class="result-detail">In customer surveys</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">🏆</div>
+                <div class="result-value">+243%</div>
+                <div class="result-label">Organic Traffic</div>
+                <div class="result-detail">SEO momentum</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">💬</div>
+                <div class="result-value">4.2→8.9</div>
+                <div class="result-label">NPS Score</div>
+                <div class="result-detail">Post-positioning</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">📊</div>
+                <div class="result-value">-58%</div>
+                <div class="result-label">CAC</div>
+                <div class="result-detail">Better targeting</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">🎖️</div>
+                <div class="result-value">Top 5</div>
+                <div class="result-label">G2 Category</div>
+                <div class="result-detail">In 6 months</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">📰</div>
+                <div class="result-value">23</div>
+                <div class="result-label">Press Mentions</div>
+                <div class="result-detail">Industry publications</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">🔄</div>
+                <div class="result-value">+156%</div>
+                <div class="result-label">Customer Referrals</div>
+                <div class="result-detail">Organic advocacy</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">🚀</div>
+                <div class="result-value">+89%</div>
+                <div class="result-label">Win Rate</div>
+                <div class="result-detail">Competitive deals</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">💼</div>
+                <div class="result-value">$12M</div>
+                <div class="result-label">Series B Raised</div>
+                <div class="result-detail">Strong positioning</div>
+            </div>
+        </div>
+
+        <div class="results-story">
+            <div class="results-story-title">The Bigger Picture</div>
+            <div class="results-story-text">
+                Beyond the metrics, the positioning work fundamentally changed how Atlas operated. The sales team finally had a clear, compelling story. Marketing knew exactly who to target and what to say. Product development aligned around the "decision intelligence" vision. Customer success could articulate value more effectively. 
+                <br><br>
+                Most importantly, customers started using language like "Atlas helps us make faster decisions" instead of "Atlas is our analytics tool." That shift — from feature to outcome — is when you know positioning has truly landed.
+                <br><br>
+                The "Decision Intelligence for Growth Teams" positioning also set Atlas up for category creation. Within a year, they were leading the conversation about what comes after traditional BI tools, positioning themselves as the inevitable future rather than just another alternative.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToPage(index) {
+            const pages = document.querySelectorAll('.page');
+            pages[index].scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const pages = document.querySelectorAll('.page');
+            const navDots = document.querySelectorAll('.nav-dot');
+            
+            let current = 0;
+            pages.forEach((page, index) => {
+                const rect = page.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                    current = index;
+                }
+            });
+
+            navDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === current);
+            });
+        });
+    </script>
+</body>
+</html>
