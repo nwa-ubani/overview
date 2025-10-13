@@ -1,19 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-    <nav style="position:fixed; top:0; width:100%; background:#222; color:#fff; padding:10px; z-index:100;">
-  <a href="index.html" style="color:#fff; margin-right:15px;">Home</a>
-  <a href="project.html" style="color:#fff; margin-right:15px;">Customer Journey</a>
-  <a href="multichannel.html" style="color:#fff; margin-right:15px;">Multi-channel</a>
-  <a href="onboarding.html" style="color:#fff; margin-right:15px;">Welcome Series</a>
-  <a href="positioning.html" style="color:#fff; margin-right:15px;">Positioning</a>
-  <!-- Add more links for each HTML file -->
-</nav>
-<div style="height:40px;"></div> <!-- Adds space so content is not hidden under the navbar -->
-  <!-- Add more links for each HTML file -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Positioning and Messaging</title>
+    <title>Strategic Positioning and Messaging</title>
     <style>
         * {
             margin: 0;
@@ -26,6 +16,29 @@
             background: #0a0a0a;
             color: #ffffff;
             overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #222;
+            color: #fff;
+            padding: 10px;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+        nav a {
+            color: #fff;
+            margin-right: 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #4facfe;
+        }
+        .nav-space {
+             height: 45px;
         }
 
         .page {
@@ -42,6 +55,7 @@
         .hero {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             text-align: center;
+            padding-top: 100px;
         }
 
         .hero h1 {
@@ -341,7 +355,7 @@
         }
 
         /* Positioning Strategy */
-        .positioning {
+        .positioning-section {
             background: #0a0a0a;
         }
 
@@ -869,9 +883,181 @@
             backdrop-filter: blur(10px);
             z-index: 99;
         }
+
+        /* --- RESPONSIVE DESIGN ADDITIONS --- */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px 5px;
+            height: auto;
+        }
+        nav a {
+            margin: 5px 8px;
+            font-size: 0.9rem;
+        }
+        .section-subtitle {
+            padding: 0 15px;
+        }
+        
+        @media (max-width: 1024px) {
+            .market-overview, .persona-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .competitor-grid, .pillar-grid, .variation-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .channel-grid, .test-grid, .canvas {
+                grid-template-columns: 1fr;
+            }
+            .framework-box {
+                padding: 40px;
+            }
+            .framework-content {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Global fixes */
+            .page {
+                padding: 80px 15px 40px;
+            }
+            .nav {
+                display: none;
+            }
+            .market-card, .persona-card, .pillar-card, .canvas-side, .test-card, .channel-card, .results-story {
+                padding: 30px;
+            }
+
+            /* Hero */
+            .hero h1 {
+                font-size: 3.5rem;
+                letter-spacing: -2px;
+            }
+            .hero .subtitle {
+                font-size: 1.4rem;
+            }
+            .hero-stats {
+                flex-direction: column;
+                gap: 25px;
+            }
+            .hero-stat-number {
+                font-size: 3rem;
+            }
+            .alias-badge {
+                right: 15px;
+                top: 50px; /* Move down due to wrapping nav */
+            }
+
+            /* Market */
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .market-stats {
+                grid-template-columns: 1fr;
+            }
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            /* Competitor */
+            .competitor-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            /* Audience */
+            .persona-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            .persona-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+            .persona-name {
+                font-size: 1.6rem;
+            }
+            .persona-role {
+                font-size: 1rem;
+            }
+
+            /* Positioning Strategy */
+            .framework-content {
+                font-size: 1.6rem;
+            }
+            .positioning-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Messaging Pillars */
+            .pillar-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            .pillar-number {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+            .pillar-title {
+                font-size: 1.8rem;
+            }
+            .pillar-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Value Prop Canvas */
+            .canvas-title {
+                font-size: 1.8rem;
+            }
+
+            /* Message Hierarchy */
+            .message-level.headline .message-level-content {
+                font-size: 1.8rem;
+            }
+            .message-level-content {
+                font-size: 1.4rem;
+            }
+            .variation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Results & Testing */
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            .result-value {
+                font-size: 2.5rem;
+            }
+            .test-title {
+                font-size: 1.6rem;
+            }
+            .test-variants {
+                gap: 15px;
+            }
+        }
     </style>
 </head>
 <body>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="project.html">Customer Journey</a>
+      <a href="multichannel.html">Multi-channel</a>
+      <a href="onboarding.html">Welcome Series</a>
+      <a href="positioning.html">Positioning</a>
+    </nav>
+    <div class="nav-space"></div>
+
     <div class="alias-badge">*All data uses aliases</div>
 
     <!-- Navigation -->
@@ -1240,7 +1426,7 @@
     </div>
 
     <!-- Positioning Strategy -->
-    <div class="page positioning">
+    <div class="page positioning-section">
         <h2 class="section-title">The New Positioning Strategy</h2>
         <p class="section-subtitle">
             Based on competitive gaps and customer needs, I developed a distinct positioning that carved out 
