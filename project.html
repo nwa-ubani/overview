@@ -1,15 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<nav style="position:fixed; top:0; width:100%; background:#222; color:#fff; padding:10px; z-index:100;">
-  <a href="index.html" style="color:#fff; margin-right:15px;">Home</a>
-  <a href="project.html" style="color:#fff; margin-right:15px;">Customer Journey</a>
-  <a href="multichannel.html" style="color:#fff; margin-right:15px;">Multi-channel</a>
-  <a href="onboarding.html" style="color:#fff; margin-right:15px;">Welcome Series</a>
-  <a href="positioning.html" style="color:#fff; margin-right:15px;">Positioning</a>
-  <!-- Add more links for each HTML file -->
-</nav>
-<div style="height:40px;"></div> <!-- Adds space so content is not hidden under the navbar -->
-  <!-- Add more links for each HTML file -->    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -711,9 +701,192 @@
             backdrop-filter: blur(10px);
             z-index: 99;
         }
+
+        /* --- RESPONSIVE DESIGN ADDITIONS --- */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px 5px;
+            height: auto;
+        }
+        nav a {
+            margin: 5px 8px;
+            font-size: 0.9rem;
+        }
+        .section-subtitle {
+            padding: 0 15px;
+        }
+
+        @media (max-width: 1024px) {
+            .challenge-grid, .research-methods, .pain-grid, .solution-grid, .results-grid, .learning-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            /* Simplify Phase display for tablets */
+            .journey-phases {
+                flex-wrap: wrap;
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .phase-line {
+                display: none; /* Hide line when phases wrap */
+            }
+            .phase {
+                flex: 0 0 45%; /* Allow wrapping */
+            }
+            .journey-lanes {
+                overflow-x: auto;
+            }
+            .lane-content {
+                /* Ensure enough width for horizontal scroll */
+                grid-template-columns: repeat(5, 200px); 
+                width: 1000px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Global fixes */
+            .page {
+                padding: 80px 15px 40px;
+            }
+            .nav {
+                display: none;
+            }
+            .challenge-card, .method-card, .pain-card, .solution-card, .result-card, .learning-card {
+                padding: 30px;
+            }
+
+            /* Hero */
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            .hero .subtitle {
+                font-size: 1.4rem;
+            }
+            .project-tags {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .tag {
+                padding: 8px 15px;
+            }
+
+            /* Challenge & Research */
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .challenge-grid, .research-methods {
+                grid-template-columns: 1fr; /* Stack */
+            }
+            .challenge-stat {
+                font-size: 3rem;
+            }
+            .method-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .method-icon {
+                margin-bottom: 0;
+            }
+
+            /* Journey Map - Force Stack */
+            .journey-phases {
+                flex-direction: column; /* Stack phases fully */
+                gap: 40px;
+                margin-bottom: 40px;
+            }
+            .phase {
+                flex: 1 1 100%;
+                text-align: left;
+                display: flex;
+                align-items: flex-start;
+            }
+            .phase-circle {
+                margin: 0;
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+                flex-shrink: 0;
+                margin-right: 20px;
+            }
+            .phase-details {
+                text-align: left;
+            }
+            /* Ensure the content itself remains scrollable horizontally */
+            .journey-lanes {
+                overflow-x: scroll;
+            }
+
+            /* Pain Points */
+            .pain-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .pain-impact {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .impact-value {
+                font-size: 1.8rem;
+            }
+
+            /* Solutions */
+            .solution-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Implementation Timeline - Single Column Fix */
+            .timeline::before {
+                left: 20px; /* Move vertical line to the left */
+            }
+            .timeline-item {
+                flex-direction: row !important; /* Force all content to one side */
+                margin-bottom: 30px;
+            }
+            .timeline-content {
+                flex: 1;
+                padding: 0 0 0 40px; /* Only pad on the left side of the content */
+            }
+            .timeline-dot {
+                left: 20px; /* Align dot with the new line */
+            }
+            .timeline-title {
+                font-size: 1.4rem;
+            }
+
+            /* Results */
+            .results-main-stat {
+                font-size: 4.5rem;
+            }
+            .results-main-label {
+                font-size: 1.4rem;
+            }
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            .result-value {
+                font-size: 2.5rem;
+            }
+
+            /* Learnings */
+            .learning-cards {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
+<nav style="position:fixed; top:0; width:100%; background:#222; color:#fff; padding:10px; z-index:100;">
+  <a href="index.html" style="color:#fff; margin-right:15px;">Home</a>
+  <a href="project.html" style="color:#fff; margin-right:15px;">Customer Journey</a>
+  <a href="multichannel.html" style="color:#fff; margin-right:15px;">Multi-channel</a>
+  <a href="onboarding.html" style="color:#fff; margin-right:15px;">Welcome Series</a>
+  <a href="positioning.html" style="color:#fff; margin-right:15px;">Positioning</a>
+  <!-- Add more links for each HTML file -->
+</nav>
+<div style="height:40px;"></div> <!-- Adds space so content is not hidden under the navbar -->
+  <!-- Add more links for each HTML file -->    
     <div class="alias-badge">*All data uses aliases</div>
 
     <!-- Navigation -->
