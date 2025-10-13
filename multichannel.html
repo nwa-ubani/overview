@@ -1,1185 +1,2710 @@
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        background: #0a0a0a;
-        color: #ffffff;
-        overflow-x: hidden;
-    }
-
-    .page {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 80px 40px;
-        position: relative;
-    }
-
-    /* Hero */
-    .hero {
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        text-align: center;
-    }
-
-    .hero h1 {
-        font-size: 5.5rem;
-        font-weight: 900;
-        margin-bottom: 30px;
-        letter-spacing: -4px;
-        line-height: 1;
-        text-shadow: 3px 3px 20px rgba(0,0,0,0.2);
-    }
-
-    .hero .subtitle {
-        font-size: 1.7rem;
-        opacity: 0.95;
-        margin-bottom: 50px;
-        max-width: 950px;
-        line-height: 1.5;
-    }
-
-    .hero-metrics {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 40px;
-        max-width: 1200px;
-        margin-top: 60px;
-    }
-
-    .hero-metric {
-        text-align: center;
-    }
-
-    .hero-metric-value {
-        font-size: 3.5rem;
-        font-weight: 900;
-        margin-bottom: 10px;
-    }
-
-    .hero-metric-label {
-        font-size: 1.05rem;
-        opacity: 0.9;
-    }
-
-    /* Section Styles */
-    .section-title {
-        font-size: 3.8rem;
-        font-weight: 900;
-        margin-bottom: 30px;
-        text-align: center;
-        letter-spacing: -2px;
-    }
-
-    .section-subtitle {
-        font-size: 1.4rem;
-        opacity: 0.75;
-        text-align: center;
-        max-width: 950px;
-        margin: 0 auto 70px;
-        line-height: 1.8;
-    }
-
-    /* Challenge */
-    .challenge {
-        background: #0d0d0d;
-    }
-
-    .challenge-visual {
-        max-width: 1400px;
-        margin-top: 60px;
-    }
-
-    .before-state {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        padding: 50px;
-        border-radius: 24px;
-        border: 2px solid rgba(250, 112, 154, 0.3);
-        margin-bottom: 50px;
-    }
-
-    .state-label {
-        display: inline-block;
-        background: rgba(250, 112, 154, 0.2);
-        color: #fa709a;
-        padding: 8px 20px;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 25px;
-    }
-
-    .state-title {
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin-bottom: 30px;
-    }
-
-    .chaos-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 25px;
-        margin-top: 30px;
-    }
-
-    .chaos-item {
-        background: rgba(0, 0, 0, 0.3);
-        padding: 30px;
-        border-radius: 16px;
-        border: 1px solid rgba(250, 112, 154, 0.2);
-    }
-
-    .chaos-icon {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
-    }
-
-    .chaos-title {
-        font-size: 1.2rem;
-        font-weight: 600;
-        margin-bottom: 12px;
-        color: #fa709a;
-    }
-
-    .chaos-desc {
-        font-size: 0.95rem;
-        opacity: 0.8;
-        line-height: 1.6;
-    }
-
-    /* Channel Audit */
-    .audit {
-        background: #111;
-    }
-
-    .channel-cards {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
-        max-width: 1400px;
-        margin-top: 60px;
-    }
-
-    .channel-audit-card {
-        background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
-        padding: 45px;
-        border-radius: 24px;
-        border: 1px solid #333;
-    }
-
-    .channel-header {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 30px;
-        padding-bottom: 20px;
-        border-bottom: 2px solid rgba(250, 112, 154, 0.2);
-    }
-
-    .channel-icon-large {
-        width: 70px;
-        height: 70px;
-        border-radius: 16px;
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-    }
-
-    .channel-name {
-        font-size: 1.8rem;
-        font-weight: 700;
-    }
-
-    .audit-section {
-        margin-bottom: 25px;
-    }
-
-    .audit-label {
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: #fa709a;
-        font-weight: 700;
-        margin-bottom: 12px;
-    }
-
-    .audit-content {
-        font-size: 1rem;
-        opacity: 0.85;
-        line-height: 1.6;
-    }
-
-    .metrics-row {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        margin-top: 15px;
-    }
-
-    .metric-box {
-        background: rgba(250, 112, 154, 0.1);
-        padding: 20px;
-        border-radius: 12px;
-        text-align: center;
-    }
-
-    .metric-value {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #fa709a;
-        margin-bottom: 5px;
-    }
-
-    .metric-label {
-        font-size: 0.85rem;
-        opacity: 0.7;
-    }
-
-    /* Strategy Framework */
-    .strategy {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    }
-
-    .framework-container {
-        max-width: 1400px;
-        margin-top: 60px;
-    }
-
-    .principle-cards {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 35px;
-        margin-bottom: 60px;
-    }
-
-    .principle-card {
-        background: rgba(0, 0, 0, 0.4);
-        padding: 40px 35px;
-        border-radius: 24px;
-        border: 2px solid rgba(250, 112, 154, 0.3);
-        backdrop-filter: blur(10px);
-        text-align: center;
-    }
-
-    .principle-number {
-        font-size: 4rem;
-        font-weight: 900;
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 20px;
-    }
-
-    .principle-title {
-        font-size: 1.6rem;
-        font-weight: 700;
-        margin-bottom: 15px;
-    }
-
-    .principle-desc {
-        font-size: 1rem;
-        opacity: 0.85;
-        line-height: 1.7;
-    }
-
-    /* Orchestration Rules */
-    .rules-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 35px;
-    }
-
-    .rule-card {
-        background: rgba(0, 0, 0, 0.3);
-        padding: 40px;
-        border-radius: 20px;
-        border: 1px solid rgba(250, 112, 154, 0.2);
-    }
-
-    .rule-icon {
-        font-size: 3rem;
-        margin-bottom: 20px;
-    }
-
-    .rule-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #fee140;
-    }
-
-    .rule-description {
-        font-size: 1.05rem;
-        opacity: 0.85;
-        line-height: 1.7;
-        margin-bottom: 20px;
-    }
-
-    .rule-example {
-        background: rgba(250, 112, 154, 0.1);
-        padding: 20px;
-        border-radius: 12px;
-        border-left: 4px solid #fa709a;
-        font-size: 0.95rem;
-        opacity: 0.8;
-        line-height: 1.6;
-    }
-
-    /* Campaign Architecture */
-    .architecture {
-        background: #0a0a0a;
-    }
-
-    .campaign-flow {
-        max-width: 1600px;
-        margin-top: 60px;
-    }
-
-    .flow-stage {
-        background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
-        padding: 45px;
-        border-radius: 24px;
-        border: 1px solid #333;
-        margin-bottom: 40px;
-    }
-
-    .stage-header {
-        display: flex;
-        align-items: center;
-        gap: 25px;
-        margin-bottom: 35px;
-    }
-
-    .stage-badge {
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        padding: 12px 28px;
-        border-radius: 25px;
-        font-size: 0.9rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .stage-title {
-        font-size: 2.2rem;
-        font-weight: 700;
-    }
-
-    .touchpoint-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 25px;
-    }
-
-    .touchpoint-card {
-        background: rgba(250, 112, 154, 0.08);
-        padding: 25px 20px;
-        border-radius: 16px;
-        border: 1px solid rgba(250, 112, 154, 0.2);
-        transition: all 0.3s ease;
-    }
-
-    .touchpoint-card:hover {
-        background: rgba(250, 112, 154, 0.15);
-        transform: translateY(-5px);
-        border-color: #fa709a;
-    }
-
-    .touchpoint-channel {
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: #fee140;
-        font-weight: 700;
-        margin-bottom: 12px;
-    }
-
-    .touchpoint-timing {
-        font-size: 0.85rem;
-        color: #fa709a;
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
-
-    .touchpoint-content {
-        font-size: 0.95rem;
-        opacity: 0.85;
-        line-height: 1.5;
-    }
-
-    /* Customer Journey Visualization */
-    .journey-viz {
-        background: #0d0d0d;
-    }
-
-    .journey-timeline {
-        max-width: 1600px;
-        margin-top: 60px;
-        position: relative;
-    }
-
-    .timeline-track {
-        position: relative;
-        padding: 40px 0;
-    }
-
-    .timeline-line {
-        position: absolute;
-        top: 50%;
-        left: 50px;
-        right: 50px;
-        height: 4px;
-        background: linear-gradient(90deg, #fa709a 0%, #fee140 50%, #4facfe 100%);
-    }
-
-    .timeline-days {
-        display: flex;
-        justify-content: space-between;
-        padding: 0 50px;
-        position: relative;
-        z-index: 2;
-    }
-
-    .day-marker {
-        text-align: center;
-    }
-
-    .day-dot {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        margin: 0 auto 15px;
-        border: 5px solid #0d0d0d;
-        box-shadow: 0 0 20px rgba(250, 112, 154, 0.5);
-    }
-
-    .day-label {
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: #fa709a;
-    }
-
-    .journey-channels {
-        margin-top: 60px;
-    }
-
-    .channel-timeline {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        padding: 35px;
-        border-radius: 20px;
-        border: 1px solid #2a2a3e;
-        margin-bottom: 25px;
-    }
-
-    .channel-timeline-header {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 25px;
-    }
-
-    .channel-timeline-icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-    }
-
-    .channel-timeline-name {
-        font-size: 1.4rem;
-        font-weight: 700;
-    }
-
-    .channel-events {
-        display: flex;
-        gap: 15px;
-        overflow-x: auto;
-        padding-bottom: 10px;
-    }
-
-    .event-bubble {
-        min-width: 200px;
-        background: rgba(250, 112, 154, 0.1);
-        padding: 20px;
-        border-radius: 16px;
-        border: 1px solid rgba(250, 112, 154, 0.2);
-    }
-
-    .event-day {
-        font-size: 0.75rem;
-        color: #fee140;
-        font-weight: 700;
-        margin-bottom: 8px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .event-action {
-        font-size: 0.9rem;
-        font-weight: 600;
-        margin-bottom: 8px;
-    }
-
-    .event-desc {
-        font-size: 0.8rem;
-        opacity: 0.7;
-        line-height: 1.4;
-    }
-
-    /* Tech Stack */
-    .tech {
-        background: #111;
-    }
-
-    .tech-stack {
-        max-width: 1400px;
-        margin-top: 60px;
-    }
-
-    .tech-category {
-        background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
-        padding: 45px;
-        border-radius: 24px;
-        border: 1px solid #333;
-        margin-bottom: 35px;
-    }
-
-    .tech-category-title {
-        font-size: 1.8rem;
-        font-weight: 700;
-        margin-bottom: 30px;
-        color: #fa709a;
-    }
-
-    .tech-tools {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 25px;
-    }
-
-    .tech-tool {
-        background: rgba(250, 112, 154, 0.05);
-        padding: 30px;
-        border-radius: 16px;
-        border: 1px solid rgba(250, 112, 154, 0.15);
-    }
-
-    .tech-tool-name {
-        font-size: 1.2rem;
-        font-weight: 700;
-        margin-bottom: 12px;
-    }
-
-    .tech-tool-purpose {
-        font-size: 0.95rem;
-        opacity: 0.8;
-        line-height: 1.6;
-        margin-bottom: 15px;
-    }
-
-    .tech-tool-integration {
-        font-size: 0.85rem;
-        color: #fee140;
-        font-weight: 600;
-    }
-
-    /* Personalization Engine */
-    .personalization {
-        background: linear-gradient(135deg, #1e1e1e 0%, #2d1b3d 100%);
-    }
-
-    .segmentation-visual {
-        max-width: 1400px;
-        margin-top: 60px;
-    }
-
-    .segment-cards {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
-        margin-bottom: 60px;
-    }
-
-    .segment-card {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 45px;
-        border-radius: 24px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-    }
-
-    .segment-header {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 30px;
-    }
-
-    .segment-avatar {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.5rem;
-    }
-
-    .segment-info {
-        flex: 1;
-    }
-
-    .segment-name {
-        font-size: 1.8rem;
-        font-weight: 700;
-        margin-bottom: 5px;
-    }
-
-    .segment-size {
-        font-size: 0.9rem;
-        opacity: 0.7;
-    }
-
-    .segment-criteria {
-        background: rgba(0, 0, 0, 0.3);
-        padding: 20px;
-        border-radius: 12px;
-        margin-bottom: 20px;
-    }
-
-    .segment-criteria-title {
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: #fee140;
-        margin-bottom: 12px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .segment-criteria-list {
-        font-size: 0.95rem;
-        opacity: 0.85;
-        line-height: 1.8;
-    }
-
-    .segment-journey {
-        font-size: 1rem;
-        opacity: 0.85;
-        line-height: 1.7;
-    }
-
-    /* Logic Tree */
-    .logic-tree {
-        margin-top: 60px;
-        max-width: 1200px;
-    }
-
-    .tree-title {
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 40px;
-        text-align: center;
-        color: #fa709a;
-    }
-
-    .tree-node {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 25px;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        margin-bottom: 20px;
-    }
-
-    .tree-condition {
-        font-size: 0.85rem;
-        color: #fee140;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 10px;
-    }
-
-    .tree-action {
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin-bottom: 8px;
-    }
-
-    .tree-detail {
-        font-size: 0.9rem;
-        opacity: 0.7;
-    }
-
-    .tree-branches {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        margin-top: 15px;
-        padding-left: 30px;
-        border-left: 2px solid rgba(250, 112, 154, 0.3);
-    }
-
-    /* Testing */
-    .testing {
-        background: #0a0a0a;
-    }
-
-    .test-results {
-        max-width: 1400px;
-        margin-top: 60px;
-    }
-
-    .test-card {
-        background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
-        padding: 45px;
-        border-radius: 24px;
-        border: 1px solid #333;
-        margin-bottom: 40px;
-    }
-
-    .test-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 35px;
-        padding-bottom: 25px;
-        border-bottom: 2px solid rgba(250, 112, 154, 0.2);
-    }
-
-    .test-title-section {
-        flex: 1;
-    }
-
-    .test-hypothesis {
-        font-size: 0.9rem;
-        color: #fee140;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 12px;
-    }
-
-    .test-title {
-        font-size: 1.8rem;
-        font-weight: 700;
-    }
-
-    .test-result-badge {
-        background: linear-gradient(135deg, #4cd964 0%, #5fde5f 100%);
-        color: #000;
-        padding: 12px 24px;
-        border-radius: 25px;
-        font-size: 0.9rem;
-        font-weight: 700;
-    }
-
-    .test-comparison {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-
-    .test-variant {
-        background: rgba(250, 112, 154, 0.05);
-        padding: 30px;
-        border-radius: 16px;
-        border: 1px solid rgba(250, 112, 154, 0.15);
-    }
-
-    .test-variant.winner {
-        border: 2px solid #4cd964;
-        background: rgba(76, 217, 100, 0.1);
-    }
-
-    .variant-label {
-        font-size: 0.85rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 15px;
-    }
-
-    .test-variant.winner .variant-label {
-        color: #4cd964;
-    }
-
-    .variant-description {
-        font-size: 1rem;
-        margin-bottom: 20px;
-        line-height: 1.6;
-    }
-
-    .variant-metrics {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-
-    .variant-metric {
-        text-align: center;
-        padding: 15px;
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 12px;
-    }
-
-    .variant-metric-value {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #fa709a;
-        margin-bottom: 5px;
-    }
-
-    .test-variant.winner .variant-metric-value {
-        color: #4cd964;
-    }
-
-    .variant-metric-label {
-        font-size: 0.8rem;
-        opacity: 0.7;
-    }
-
-    /* Results */
-    .results {
-        background: #0d0d0d;
-    }
-
-    .results-hero {
-        text-align: center;
-        max-width: 1000px;
-        margin-bottom: 70px;
-    }
-
-    .results-main-stat {
-        font-size: 8rem;
-        font-weight: 900;
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 20px;
-    }
-
-    .results-main-label {
-        font-size: 2.2rem;
-        opacity: 0.9;
-    }
-
-    .results-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 35px;
-        max-width: 1400px;
-        margin-top: 60px;
-    }
-
-    .result-card {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        padding: 45px 35px;
-        border-radius: 24px;
-        border: 1px solid #2a2a3e;
-        text-align: center;
-    }
-
-    .result-icon {
-        font-size: 3.5rem;
-        margin-bottom: 25px;
-    }
-
-    .result-value {
-        font-size: 3.2rem;
-        font-weight: 900;
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 15px;
-    }
-
-    .result-label {
-        font-size: 1.15rem;
-        opacity: 0.85;
-        margin-bottom: 10px;
-    }
-
-    .result-detail {
-        font-size: 0.9rem;
-        opacity: 0.6;
-    }
-
-    /* Key Learnings */
-    .learnings {
-        background: #111;
-    }
-
-    .learning-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
-        max-width: 1400px;
-        margin-top: 60px;
-    }
-
-    .learning-card {
-        background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
-        padding: 45px;
-        border-radius: 24px;
-        border: 1px solid #333;
-    }
-
-    .learning-icon {
-        font-size: 3.5rem;
-        margin-bottom: 25px;
-    }
-
-    .learning-title {
-        font-size: 1.7rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #fee140;
-    }
-
-    .learning-text {
-        font-size: 1.05rem;
-        opacity: 0.85;
-        line-height: 1.8;
-    }
-
-    /* Navigation */
-    .nav {
-        position: fixed;
-        right: 40px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 100;
-    }
-
-    .nav-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        margin: 15px 0;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .nav-dot.active {
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        transform: scale(1.3);
-        box-shadow: 0 0 20px rgba(250, 112, 154, 0.6);
-    }
-
-    .alias-badge {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: rgba(250, 112, 154, 0.2);
-        padding: 12px 24px;
-        border-radius: 30px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        border: 1px solid rgba(250, 112, 154, 0.4);
-        backdrop-filter: blur(10px);
-        z-index: 99;
-    }
-
-    /* --- RESPONSIVE DESIGN ADDITIONS --- */
-    nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 10px 5px;
-        height: auto;
-    }
-    nav a {
-        margin: 5px 8px;
-        font-size: 0.9rem;
-    }
-    .section-subtitle {
-        padding: 0 15px;
-    }
-
-    @media (max-width: 1024px) {
-        .hero-metrics {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Channel Orchestration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .chaos-grid, .principle-cards, .tech-tools {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-        }
-        .touchpoint-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        .results-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
 
-    @media (max-width: 768px) {
-        /* Global fixes */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
         .page {
-            padding: 80px 15px 40px;
-        }
-        .nav {
-            display: none; /* Hide dots on mobile for better screen use */
-        }
-        .channel-audit-card, .test-card, .learning-card, .result-card {
-            padding: 30px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 40px;
+            position: relative;
         }
 
         /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            text-align: center;
+        }
+
         .hero h1 {
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            letter-spacing: -4px;
+            line-height: 1;
+            text-shadow: 3px 3px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero .subtitle {
+            font-size: 1.7rem;
+            opacity: 0.95;
+            margin-bottom: 50px;
+            max-width: 950px;
+            line-height: 1.5;
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin-top: 60px;
+        }
+
+        .hero-metric {
+            text-align: center;
+        }
+
+        .hero-metric-value {
             font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .hero-metric-label {
+            font-size: 1.05rem;
+            opacity: 0.9;
+        }
+
+        /* Section Styles */
+        .section-title {
+            font-size: 3.8rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-align: center;
             letter-spacing: -2px;
         }
-        .hero .subtitle {
+
+        .section-subtitle {
             font-size: 1.4rem;
-        }
-        .hero-metrics {
-            grid-template-columns: 1fr; /* Stack metrics */
+            opacity: 0.75;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto 70px;
+            line-height: 1.8;
         }
 
         /* Challenge */
-        .section-title {
-            font-size: 2.5rem;
+        .challenge {
+            background: #0d0d0d;
         }
+
+        .challenge-visual {
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .before-state {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 50px;
+            border-radius: 24px;
+            border: 2px solid rgba(250, 112, 154, 0.3);
+            margin-bottom: 50px;
+        }
+
+        .state-label {
+            display: inline-block;
+            background: rgba(250, 112, 154, 0.2);
+            color: #fa709a;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        .state-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
         .chaos-grid {
-            grid-template-columns: 1fr; /* Stack chaos items */
-        }
-
-        /* Audit */
-        .channel-cards {
-            grid-template-columns: 1fr; /* Stack audit cards */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
-        }
-        .metrics-row {
-            grid-template-columns: 1fr;
-        }
-        .channel-header {
-            flex-direction: column;
-            text-align: center;
-        }
-        .channel-name {
-            font-size: 1.4rem;
-        }
-
-        /* Strategy */
-        .principle-cards,
-        .rules-grid,
-        .touchpoint-grid {
-            grid-template-columns: 1fr; /* Stack principles, rules, and touchpoints */
-            gap: 25px;
-        }
-        .rule-card, .principle-card {
-            padding: 30px;
-        }
-
-        /* Architecture */
-        .stage-title {
-            font-size: 1.8rem;
-        }
-        .touchpoint-card {
-            padding: 20px;
-        }
-
-        /* Journey Visualization (Simplification for Mobile) */
-        .journey-timeline {
-            overflow-x: auto; /* Enable horizontal scroll for long timeline */
-            padding-bottom: 20px;
-        }
-        .timeline-track {
-            min-width: 600px; /* Ensure space for day markers */
-        }
-        .timeline-line {
-            left: 20px;
-            right: 20px;
-        }
-        .timeline-days {
-            padding: 0 20px;
-        }
-        .journey-channels {
             margin-top: 30px;
         }
+
+        .chaos-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(250, 112, 154, 0.2);
+        }
+
+        .chaos-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .chaos-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fa709a;
+        }
+
+        .chaos-desc {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Channel Audit */
+        .audit {
+            background: #111;
+        }
+
+        .channel-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .channel-audit-card {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            padding: 45px;
+            border-radius: 24px;
+            border: 1px solid #333;
+        }
+
+        .channel-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(250, 112, 154, 0.2);
+        }
+
+        .channel-icon-large {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .channel-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .audit-section {
+            margin-bottom: 25px;
+        }
+
+        .audit-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fa709a;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .audit-content {
+            font-size: 1rem;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .metric-box {
+            background: rgba(250, 112, 154, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fa709a;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* Strategy Framework */
+        .strategy {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .framework-container {
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .principle-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+            margin-bottom: 60px;
+        }
+
+        .principle-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px 35px;
+            border-radius: 24px;
+            border: 2px solid rgba(250, 112, 154, 0.3);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .principle-number {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .principle-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .principle-desc {
+            font-size: 1rem;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+
+        /* Orchestration Rules */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 35px;
+        }
+
+        .rule-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(250, 112, 154, 0.2);
+        }
+
+        .rule-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .rule-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fee140;
+        }
+
+        .rule-description {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .rule-example {
+            background: rgba(250, 112, 154, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #fa709a;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Campaign Architecture */
+        .architecture {
+            background: #0a0a0a;
+        }
+
+        .campaign-flow {
+            max-width: 1600px;
+            margin-top: 60px;
+        }
+
+        .flow-stage {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            padding: 45px;
+            border-radius: 24px;
+            border: 1px solid #333;
+            margin-bottom: 40px;
+        }
+
+        .stage-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .stage-badge {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stage-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .touchpoint-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .touchpoint-card {
+            background: rgba(250, 112, 154, 0.08);
+            padding: 25px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(250, 112, 154, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .touchpoint-card:hover {
+            background: rgba(250, 112, 154, 0.15);
+            transform: translateY(-5px);
+            border-color: #fa709a;
+        }
+
+        .touchpoint-channel {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fee140;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .touchpoint-timing {
+            font-size: 0.85rem;
+            color: #fa709a;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .touchpoint-content {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+
+        /* Customer Journey Visualization */
+        .journey-viz {
+            background: #0d0d0d;
+        }
+
+        .journey-timeline {
+            max-width: 1600px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .timeline-track {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 50px;
+            right: 50px;
+            height: 4px;
+            background: linear-gradient(90deg, #fa709a 0%, #fee140 50%, #4facfe 100%);
+        }
+
+        .timeline-days {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .day-marker {
+            text-align: center;
+        }
+
+        .day-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            margin: 0 auto 15px;
+            border: 5px solid #0d0d0d;
+            box-shadow: 0 0 20px rgba(250, 112, 154, 0.5);
+        }
+
+        .day-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fa709a;
+        }
+
+        .journey-channels {
+            margin-top: 60px;
+        }
+
+        .channel-timeline {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid #2a2a3e;
+            margin-bottom: 25px;
+        }
+
+        .channel-timeline-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .channel-timeline-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .channel-timeline-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
         .channel-events {
-            flex-wrap: nowrap; /* Keep events in a horizontal timeline */
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .event-bubble {
+            min-width: 200px;
+            background: rgba(250, 112, 154, 0.1);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(250, 112, 154, 0.2);
+        }
+
+        .event-day {
+            font-size: 0.75rem;
+            color: #fee140;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .event-action {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .event-desc {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            line-height: 1.4;
         }
 
         /* Tech Stack */
-        .tech-tools {
-            grid-template-columns: 1fr;
-        }
-        .tech-category-title {
-            font-size: 1.4rem;
+        .tech {
+            background: #111;
         }
 
-        /* Personalization */
-        .segment-cards {
-            grid-template-columns: 1fr;
+        .tech-stack {
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .tech-category {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            padding: 45px;
+            border-radius: 24px;
+            border: 1px solid #333;
+            margin-bottom: 35px;
+        }
+
+        .tech-category-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #fa709a;
+        }
+
+        .tech-tools {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
         }
-        .segment-card {
+
+        .tech-tool {
+            background: rgba(250, 112, 154, 0.05);
             padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(250, 112, 154, 0.15);
         }
+
+        .tech-tool-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .tech-tool-purpose {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .tech-tool-integration {
+            font-size: 0.85rem;
+            color: #fee140;
+            font-weight: 600;
+        }
+
+        /* Personalization Engine */
+        .personalization {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d1b3d 100%);
+        }
+
+        .segmentation-visual {
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .segment-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .segment-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 45px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
         .segment-header {
-            flex-direction: column;
-            text-align: center;
-        }
-        .segment-name {
-            font-size: 1.6rem;
-        }
-        .logic-tree .tree-branches {
-            grid-template-columns: 1fr;
-            padding-left: 15px;
-        }
-
-        /* Testing */
-        .test-header {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .test-result-badge {
-            margin-top: 15px;
-        }
-        .test-comparison {
-            grid-template-columns: 1fr;
+            display: flex;
+            align-items: center;
             gap: 20px;
+            margin-bottom: 30px;
         }
 
-        /* Results */
-        .results-main-stat {
-            font-size: 5rem;
-        }
-        .results-main-label {
-            font-size: 1.5rem;
-        }
-        .results-grid {
-            grid-template-columns: 1fr;
-        }
-        .result-value {
+        .segment-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 2.5rem;
         }
 
-        /* Learnings */
+        .segment-info {
+            flex: 1;
+        }
+
+        .segment-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .segment-size {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .segment-criteria {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .segment-criteria-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fee140;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .segment-criteria-list {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            line-height: 1.8;
+        }
+
+        .segment-journey {
+            font-size: 1rem;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+
+        /* Logic Tree */
+        .logic-tree {
+            margin-top: 60px;
+            max-width: 1200px;
+        }
+
+        .tree-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #fa709a;
+        }
+
+        .tree-node {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .tree-condition {
+            font-size: 0.85rem;
+            color: #fee140;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .tree-action {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .tree-detail {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .tree-branches {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 15px;
+            padding-left: 30px;
+            border-left: 2px solid rgba(250, 112, 154, 0.3);
+        }
+
+        /* Testing */
+        .testing {
+            background: #0a0a0a;
+        }
+
+        .test-results {
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .test-card {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            padding: 45px;
+            border-radius: 24px;
+            border: 1px solid #333;
+            margin-bottom: 40px;
+        }
+
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid rgba(250, 112, 154, 0.2);
+        }
+
+        .test-title-section {
+            flex: 1;
+        }
+
+        .test-hypothesis {
+            font-size: 0.9rem;
+            color: #fee140;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .test-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .test-result-badge {
+            background: linear-gradient(135deg, #4cd964 0%, #5fde5f 100%);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .test-comparison {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .test-variant {
+            background: rgba(250, 112, 154, 0.05);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(250, 112, 154, 0.15);
+        }
+
+        .test-variant.winner {
+            border: 2px solid #4cd964;
+            background: rgba(76, 217, 100, 0.1);
+        }
+
+        .variant-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .test-variant.winner .variant-label {
+            color: #4cd964;
+        }
+
+        .variant-description {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .variant-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .variant-metric {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+        }
+
+        .variant-metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fa709a;
+            margin-bottom: 5px;
+        }
+
+        .test-variant.winner .variant-metric-value {
+            color: #4cd964;
+        }
+
+        .variant-metric-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* Results */
+        .results {
+            background: #0d0d0d;
+        }
+
+        .results-hero {
+            text-align: center;
+            max-width: 1000px;
+            margin-bottom: 70px;
+        }
+
+        .results-main-stat {
+            font-size: 8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .results-main-label {
+            font-size: 2.2rem;
+            opacity: 0.9;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+            max-width: 1400px;
+            margin-top: 60px;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 45px 35px;
+            border-radius: 24px;
+            border: 1px solid #2a2a3e;
+            text-align: center;
+        }
+
+        .result-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+        }
+
+        .result-value {
+            font-size: 3.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .result-label {
+            font-size: 1.15rem;
+            opacity: 0.85;
+            margin-bottom: 10px;
+        }
+
+        .result-detail {
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        /* Key Learnings */
+        .learnings {
+            background: #111;
+        }
+
         .learning-grid {
-            grid-template-columns: 1fr;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin-top: 60px;
         }
+
+        .learning-card {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            padding: 45px;
+            border-radius: 24px;
+            border: 1px solid #333;
+        }
+
+        .learning-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+        }
+
         .learning-title {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fee140;
         }
-    }
-</style>
+
+        .learning-text {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            line-height: 1.8;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            transform: scale(1.3);
+            box-shadow: 0 0 20px rgba(250, 112, 154, 0.6);
+        }
+
+        .alias-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(250, 112, 154, 0.2);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(250, 112, 154, 0.4);
+            backdrop-filter: blur(10px);
+            z-index: 99;
+        }
+
+        /* --- RESPONSIVE DESIGN ADDITIONS --- */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px 5px;
+            height: auto;
+        }
+        nav a {
+            margin: 5px 8px;
+            font-size: 0.9rem;
+        }
+        .section-subtitle {
+            padding: 0 15px;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-metrics {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            .chaos-grid, .principle-cards, .tech-tools {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            .touchpoint-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Global fixes */
+            .page {
+                padding: 80px 15px 40px;
+            }
+            .nav {
+                display: none; /* Hide dots on mobile for better screen use */
+            }
+            .channel-audit-card, .test-card, .learning-card, .result-card {
+                padding: 30px;
+            }
+
+            /* Hero */
+            .hero h1 {
+                font-size: 3.5rem;
+                letter-spacing: -2px;
+            }
+            .hero .subtitle {
+                font-size: 1.4rem;
+            }
+            .hero-metrics {
+                grid-template-columns: 1fr; /* Stack metrics */
+            }
+
+            /* Challenge */
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .chaos-grid {
+                grid-template-columns: 1fr; /* Stack chaos items */
+            }
+
+            /* Audit */
+            .channel-cards {
+                grid-template-columns: 1fr; /* Stack audit cards */
+                gap: 25px;
+            }
+            .metrics-row {
+                grid-template-columns: 1fr;
+            }
+            .channel-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .channel-name {
+                font-size: 1.4rem;
+            }
+
+            /* Strategy */
+            .principle-cards,
+            .rules-grid,
+            .touchpoint-grid {
+                grid-template-columns: 1fr; /* Stack principles, rules, and touchpoints */
+                gap: 25px;
+            }
+            .rule-card, .principle-card {
+                padding: 30px;
+            }
+
+            /* Architecture */
+            .stage-title {
+                font-size: 1.8rem;
+            }
+            .touchpoint-card {
+                padding: 20px;
+            }
+
+            /* Journey Visualization (Simplification for Mobile) */
+            .journey-timeline {
+                overflow-x: auto; /* Enable horizontal scroll for long timeline */
+                padding-bottom: 20px;
+            }
+            .timeline-track {
+                min-width: 600px; /* Ensure space for day markers */
+            }
+            .timeline-line {
+                left: 20px;
+                right: 20px;
+            }
+            .timeline-days {
+                padding: 0 20px;
+            }
+            .journey-channels {
+                margin-top: 30px;
+            }
+            .channel-events {
+                flex-wrap: nowrap; /* Keep events in a horizontal timeline */
+            }
+
+            /* Tech Stack */
+            .tech-tools {
+                grid-template-columns: 1fr;
+            }
+            .tech-category-title {
+                font-size: 1.4rem;
+            }
+
+            /* Personalization */
+            .segment-cards {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .segment-card {
+                padding: 30px;
+            }
+            .segment-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .segment-name {
+                font-size: 1.6rem;
+            }
+            .logic-tree .tree-branches {
+                grid-template-columns: 1fr;
+                padding-left: 15px;
+            }
+
+            /* Testing */
+            .test-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .test-result-badge {
+                margin-top: 15px;
+            }
+            .test-comparison {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            /* Results */
+            .results-main-stat {
+                font-size: 5rem;
+            }
+            .results-main-label {
+                font-size: 1.5rem;
+            }
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            .result-value {
+                font-size: 2.5rem;
+            }
+
+            /* Learnings */
+            .learning-grid {
+                grid-template-columns: 1fr;
+            }
+            .learning-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav style="position:fixed; top:0; width:100%; background:#222; color:#fff; padding:10px; z-index:100;">
+        <a href="index.html" style="color:#fff; margin-right:15px;">Home</a>
+        <a href="project.html" style="color:#fff; margin-right:15px;">Customer Journey</a>
+        <a href="multichannel.html" style="color:#fff; margin-right:15px;">Multi-channel</a>
+        <a href="onboarding.html" style="color:#fff; margin-right:15px;">Welcome Series Redesign</a>
+        <a href="positioning.html" style="color:#fff; margin-right:15px;">Positioning</a>
+        <!-- Add more links for each HTML file -->
+    </nav>
+    <div style="height:40px;"></div> <!-- Adds space so content is not hidden under the navbar -->
+    
+    <div class="alias-badge">*All data uses aliases</div>
+
+    <!-- Navigation -->
+    <div class="nav">
+        <div class="nav-dot active" onclick="scrollToPage(0)"></div>
+        <div class="nav-dot" onclick="scrollToPage(1)"></div>
+        <div class="nav-dot" onclick="scrollToPage(2)"></div>
+        <div class="nav-dot" onclick="scrollToPage(3)"></div>
+        <div class="nav-dot" onclick="scrollToPage(4)"></div>
+        <div class="nav-dot" onclick="scrollToPage(5)"></div>
+        <div class="nav-dot" onclick="scrollToPage(6)"></div>
+        <div class="nav-dot" onclick="scrollToPage(7)"></div>
+        <div class="nav-dot" onclick="scrollToPage(8)"></div>
+        <div class="nav-dot" onclick="scrollToPage(9)"></div>
+    </div>
+
+    <!-- Hero -->
+    <div class="page hero">
+        <h1>Multi-Channel<br>Orchestration</h1>
+        <p class="subtitle">Building a unified, intelligent lifecycle marketing engine across email, SMS, in-app, push, and direct mail for Momentum Commerce — driving 267% increase in customer engagement</p>
+        
+        <div class="hero-metrics">
+            <div class="hero-metric">
+                <div class="hero-metric-value">267%</div>
+                <div class="hero-metric-label">Engagement Increase</div>
+            </div>
+            <div class="hero-metric">
+                <div class="hero-metric-value">5→1</div>
+                <div class="hero-metric-label">Tools Consolidated</div>
+            </div>
+            <div class="hero-metric">
+                <div class="hero-metric-value">-43%</div>
+                <div class="hero-metric-label">Message Fatigue</div>
+            </div>
+            <div class="hero-metric">
+                <div class="hero-metric-value">+189%</div>
+                <div class="hero-metric-label">Conversion Rate</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Challenge -->
+    <div class="page challenge">
+        <h2 class="section-title">The Chaos of Disconnected Channels</h2>
+        <p class="section-subtitle">
+            Momentum Commerce, a fast-growing D2C e-commerce platform, was scaling rapidly but their marketing was a mess. 
+            Five different teams managed five different channels with zero coordination. Customers were bombarded, 
+            confused, and increasingly tuning out.
+        </p>
+
+        <div class="challenge-visual">
+            <div class="before-state">
+                <span class="state-label">Before: Channel Chaos</span>
+                <div class="state-title">The Disconnect Problem</div>
+                
+                <div class="chaos-grid">
+                    <div class="chaos-item">
+                        <div class="chaos-icon">📧</div>
+                        <div class="chaos-title">Email Team</div>
+                        <div class="chaos-desc">
+                            Running campaigns in HubSpot. No visibility into other channels. 
+                            Sending 3-4 emails per week regardless of customer engagement elsewhere.
+                        </div>
+                    </div>
+
+                    <div class="chaos-item">
+                        <div class="chaos-icon">💬</div>
+                        <div class="chaos-title">SMS Team</div>
+                        <div class="chaos-desc">
+                            Using Attentive. Promotional blasts 2x per week. No suppression 
+                            for customers already engaged via email or in-app.
+                        </div>
+                    </div>
+
+                    <div class="chaos-item">
+                        <div class="chaos-icon">📱</div>
+                        <div class="chaos-title">In-App Team</div>
+                        <div class="chaos-desc">
+                            Product team managing messages in-app. Zero coordination with marketing. 
+                            Showing promo banners to customers who already purchased.
+                        </div>
+                    </div>
+
+                    <div class="chaos-item">
+                        <div class="chaos-icon">🔔</div>
+                        <div class="chaos-title">Push Team</div>
+                        <div class="chaos-desc">
+                            Using OneSignal. Cart abandonment + promo notifications. 
+                            Often duplicating email/SMS messages within minutes.
+                        </div>
+                    </div>
+
+                    <div class="chaos-item">
+                        <div class="chaos-icon">✉️</div>
+                        <div class="chaos-title">Direct Mail</div>
+                        <div class="chaos-desc">
+                            Using Lob for high-value customers. No data on who already 
+                            converted via digital channels. Wasteful spend.
+                        </div>
+                    </div>
+
+                    <div class="chaos-item">
+                        <div class="chaos-icon">😵</div>
+                        <div class="chaos-title">Customer Experience</div>
+                        <div class="chaos-desc">
+                            Receiving 8-12 marketing messages per week across channels. 
+                            Same promotions repeated. Increasing unsubscribe and opt-out rates.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Channel Audit -->
+    <div class="page audit">
+        <h2 class="section-title">Comprehensive Channel Audit</h2>
+        <p class="section-subtitle">
+            I conducted a 360° audit of every channel to understand performance, overlap, and opportunities. 
+            The findings revealed massive inefficiencies and a clear path to orchestration.
+        </p>
+
+        <div class="channel-cards">
+            <div class="channel-audit-card">
+                <div class="channel-header">
+                    <div class="channel-icon-large">📧</div>
+                    <div class="channel-name">Email</div>
+                </div>
+
+                <div class="audit-section">
+                    <div class="audit-label">Current State</div>
+                    <div class="audit-content">
+                        12 active campaigns running simultaneously. Average 3.7 emails per subscriber per week. 
+                        Batch-and-blast mentality with minimal segmentation.
+                    </div>
+                </div>
+
+                <div class="audit-section">
+                    <div class="audit-label">Key Issues</div>
+                    <div class="audit-content">
+                        67% message overlap with SMS. Subscribers getting same promo via 3 different campaigns. 
+                        No engagement-based frequency capping. List fatigue evident.
+                    </div>
+                </div>
+
+                <div class="metrics-row">
+                    <div class="metric-box">
+                        <div class="metric-value">18.2%</div>
+                        <div class="metric-label">Open Rate</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">2.1%</div>
+                        <div class="metric-label">Click Rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="channel-audit-card">
+                <div class="channel-header">
+                    <div class="channel-icon-large">💬</div>
+                    <div class="channel-name">SMS</div>
+                </div>
+
+                <div class="audit-section">
+                    <div class="audit-label">Current State</div>
+                    <div class="audit-content">
+                        Promotional blasts 2x per week. Cart abandonment series. Flash sale alerts. 
+                        Growing opt-out rate indicating message fatigue.
+                    </div>
+                </div>
+
+                <div class="audit-section">
+                    <div class="audit-label">Key Issues</div>
+                    <div class="audit-content">
+                        No suppression for recent purchasers. Sending promo SMS to customers who 
+                        already bought via email. Treating SMS like cheap email instead of premium channel.
+                    </div>
+                </div>
+
+                <div class="metrics-row">
+                    <div class="metric-box">
+                        <div class="metric-value">42%</div>
+                        <div class="metric-label">Open Rate</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">8.3%</div>
+                        <div class="metric-label">CTR</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="channel-audit-card">
+                <div class="channel-header">
+                    <div class="channel-icon-large">📱</div>
+                    <div class="channel-name">In-App Messaging</div>
+                </div>
+
+                <div class="audit-section">
+                    <div class="audit-label">Current State</div>
+                    <div class="audit-content">
+                        Banner ads for promotions. Feature announcement modals. Survey prompts. 
+                        All managed by product team with no marketing input.
+                    </div>
+                </div>
+
+                <div class="audit-section">
+                    <div class="audit-label">Key Issues</div>
+                    <div class="audit-content">
+                        Showing promo banners to users who already saw the promotion via email/SMS. 
+                        No lifecycle stage awareness. Interrupting high-intent purchase flows with surveys.
+                    </div>
+                </div>
+
+                <div class="metrics-row">
+                    <div class="metric-box">
+                        <div class="metric-value">34%</div>
+                        <div class="metric-label">Impression Rate</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">11.2%</div>
+                        <div class="metric-label">Click Rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="channel-audit-card">
+                <div class="channel-header">
+                    <div class="channel-icon-large">🔔</div>
+                    <div class="channel-name">Push Notifications</div>
+                </div>
+
+                <div class="audit-section">
+                    <div class="audit-label">Current State</div>
+                    <div class="audit-content">
+                        Cart abandonment pushes, back-in-stock alerts, promotional announcements. 
+                        Often sent within 5 minutes of similar email going out.
+                    </div>
+                </div>
+
+                <div class="audit-section">
+                    <div class="audit-label">Key Issues</div>
+                    <div class="audit-content">
+                        Massive duplication with email. Customers receiving identical message via 
+                        push and email simultaneously. Contributing to notification fatigue and opt-outs.
+                    </div>
+                </div>
+
+                <div class="metrics-row">
+                    <div class="metric-box">
+                        <div class="metric-value">28%</div>
+                        <div class="metric-label">Delivery Rate</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">6.7%</div>
+                        <div class="metric-label">Open Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Strategy Framework -->
+    <div class="page strategy">
+        <h2 class="section-title">Orchestration Strategy & Principles</h2>
+        <p class="section-subtitle">
+            I developed a comprehensive orchestration framework built on three core principles that would 
+            govern all cross-channel marketing decisions and ensure unified customer experiences.
+        </p>
+
+        <div class="framework-container">
+            <div class="principle-cards">
+                <div class="principle-card">
+                    <div class="principle-number">01</div>
+                    <div class="principle-title">Customer-First Routing</div>
+                    <div class="principle-desc">
+                        The customer's preferred channel and recent engagement history determines the channel, 
+                        timing, and frequency of messages — not the marketing team's campaign calendar.
+                    </div>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-number">02</div>
+                    <div class="principle-title">Unified Message Intelligence</div>
+                    <div class="principle-desc">
+                        Every channel knows what every other channel is doing. No duplicate messages. 
+                        No contradictory offers. One cohesive story told across all touchpoints.
+                    </div>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-number">03</div>
+                    <div class="principle-title">Dynamic Frequency Optimization</div>
+                    <div class="principle-desc">
+                        Engagement-based throttling automatically adjusts message frequency. 
+                        Highly engaged customers hear more. Fatigued customers get breathing room.
+                    </div>
+                </div>
+            </div>
+
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <div class="rule-icon">🎯</div>
+                    <div class="rule-title">Channel Priority Logic</div>
+                    <div class="rule-description">
+                        Not all channels are equal for all messages. Each message type has a preferred 
+                        channel hierarchy based on urgency, importance, and typical conversion rates.
+                    </div>
+                    <div class="rule-example">
+                        <strong>Example:</strong> Cart abandonment starts with email (low friction), 
+                        escalates to SMS after 4 hours if not opened, uses push only if both fail and 
+                        cart value >$150.
+                    </div>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon">⏱️</div>
+                    <div class="rule-title">Timing Coordination</div>
+                    <div class="rule-description">
+                        Messages across channels are spaced strategically. If a customer receives an 
+                        email, other channels wait 4+ hours before sending related content.
+                    </div>
+                    <div class="rule-example">
+                        <strong>Example:</strong> Customer gets promotional email at 10am. SMS about 
+                        the same promo is suppressed until 2pm minimum. In-app banner only shows if 
+                        email unopened after 24 hours.
+                    </div>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon">🚫</div>
+                    <div class="rule-title">Message Suppression Rules</div>
+                    <div class="rule-description">
+                        Customers who already took action don't need reminders. Sophisticated suppression 
+                        prevents post-purchase promotional messages and duplicate content.
+                    </div>
+                    <div class="rule-example">
+                        <strong>Example:</strong> Customer purchases via email link. All promotional 
+                        messages across all channels suppressed for 7 days. Cart abandonment sequences 
+                        immediately terminated.
+                    </div>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon">📊</div>
+                    <div class="rule-title">Engagement-Based Cadence</div>
+                    <div class="rule-description">
+                        Message frequency adapts to individual engagement patterns. Highly engaged 
+                        customers can receive more. Disengaged customers get fewer, higher-value messages.
+                    </div>
+                    <div class="rule-example">
+                        <strong>Example:</strong> Customer with 60%+ email open rate can receive up to 
+                        5 emails/week. Customer with <10% open rate limited to 1-2 emails/week of only 
+                        highest-value content.
+                    </div>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon">🎨</div>
+                    <div class="rule-title">Creative Consistency</div>
+                    <div class="rule-description">
+                        When the same campaign runs across channels, the creative, messaging, and offer 
+                        remain consistent. Customers see one cohesive story, not conflicting narratives.
+                    </div>
+                    <div class="rule-example">
+                        <strong>Example:</strong> "Summer Sale - 30% Off" email uses same headline, 
+                        visual style, and discount code as SMS, push, and in-app versions. Only format 
+                        adapts to channel.
+                    </div>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon">⚡</div>
+                    <div class="rule-title">Real-Time Attribution</div>
+                    <div class="rule-description">
+                        Every channel tracks which touchpoint drove conversion. This data feeds back 
+                        into routing logic to optimize future channel selection for each customer.
+                    </div>
+                    <div class="rule-example">
+                        <strong>Example:</strong> Customer consistently converts via SMS but ignores 
+                        email. Future campaigns prioritize SMS for this customer while reducing email 
+                        frequency.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Campaign Architecture -->
+    <div class="page architecture">
+        <h2 class="section-title">Orchestrated Campaign Architecture</h2>
+        <p class="section-subtitle">
+            I redesigned their core campaigns with intelligent cross-channel orchestration. 
+            Here's how a typical promotional campaign flows across channels with perfect coordination.
+        </p>
+
+        <div class="campaign-flow">
+            <div class="flow-stage">
+                <div class="stage-header">
+                    <span class="stage-badge">Stage 1: Initial Reach</span>
+                    <div class="stage-title">Day 0 - Campaign Launch</div>
+                </div>
+                
+                <div class="touchpoint-grid">
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">📧 EMAIL</div>
+                        <div class="touchpoint-timing">10:00 AM</div>
+                        <div class="touchpoint-content">
+                            Send to engaged segment (opened 2+ emails in last 30 days). 
+                            Full product showcase with 30% off code.
+                        </div>
+                    </div>
+
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">📱 IN-APP</div>
+                        <div class="touchpoint-timing">10:00 AM</div>
+                        <div class="touchpoint-content">
+                            Banner for active app users who haven't received email. 
+                            Same creative, same offer.
+                        </div>
+                    </div>
+
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">🔔 PUSH</div>
+                        <div class="touchpoint-timing">2:00 PM</div>
+                        <div class="touchpoint-content">
+                            Only to users who: (1) opted in to push, (2) didn't open email, 
+                            (3) are high-value customers (LTV >$500).
+                        </div>
+                    </div>
+
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">💬 SMS</div>
+                        <div class="touchpoint-timing">Evening</div>
+                        <div class="touchpoint-content">
+                            Reserved for VIP tier only (top 10% customers). 
+                            Exclusive early access messaging.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-stage">
+                <div class="stage-header">
+                    <span class="stage-badge">Stage 2: Engagement Layer</span>
+                    <div class="stage-title">Days 1-2 - Nurture & Remind</div>
+                </div>
+                
+                <div class="touchpoint-grid">
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">📧 EMAIL</div>
+                        <div class="touchpoint-timing">Day 1, 6:00 PM</div>
+                        <div class="touchpoint-content">
+                            "You haven't shopped yet" reminder to email recipients who 
+                            opened but didn't click. Product recommendations included.
+                        </div>
+                    </div>
+
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">🔔 PUSH</div>
+                        <div class="touchpoint-timing">Day 2, 10:00 AM</div>
+                        <div class="touchpoint-content">
+                            Cart abandonment if user added items but didn't purchase. 
+                            "Complete your purchase" with urgency messaging.
+                        </div>
+                    </div>
+
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">📱 IN-APP</div>
+                        <div class="touchpoint-timing">Next App Open</div>
+                        <div class="touchpoint-content">
+                            Dynamic banner showing items they viewed previously. 
+                            Only shows if they haven't purchased yet.
+                        </div>
+                    </div>
+
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">💬 SMS</div>
+                        <div class="touchpoint-timing">Day 2, Evening</div>
+                        <div class="touchpoint-content">
+                            Only to users who clicked email/push but abandoned cart >$100. 
+                            "Extra 10% off expiring tonight" urgency play.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-stage">
+                <div class="stage-header">
+                    <span class="stage-badge">Stage 3: Final Push</span>
+                    <div class="stage-title">Day 3 - Last Chance</div>
+                </div>
+                
+                <div class="touchpoint-grid">
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">📧 EMAIL</div>
+                        <div class="touchpoint-timing">Morning</div>
+                        <div class="touchpoint-content">
+                            "Last 24 hours" urgency email to engaged non-purchasers. 
+                            Scarcity messaging with stock availability indicators.
+                        </div>
+                    </div>
+
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">💬 SMS</div>
+                        <div class="touchpoint-timing">6:00 PM</div>
+                        <div class="touchpoint-content">
+                            High-value customers only. "Ends tonight at midnight" 
+                            with direct purchase link.
+                        </div>
+                    </div>
+
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">🔔 PUSH</div>
+                        <div class="touchpoint-timing">8:00 PM</div>
+                        <div class="touchpoint-content">
+                            Final reminder to users with items in cart. 
+                            "Your cart is expiring in 4 hours" countdown.
+                        </div>
+                    </div>
+
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">✉️ DIRECT MAIL</div>
+                        <div class="touchpoint-timing">Post-Campaign</div>
+                        <div class="touchpoint-content">
+                            VIP customers who didn't purchase get physical postcard 
+                            with exclusive "we miss you" offer within 7 days.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-stage">
+                <div class="stage-header">
+                    <span class="stage-badge">Stage 4: Post-Purchase</span>
+                    <div class="stage-title">After Conversion - Nurture & Retain</div>
+                </div>
+                
+                <div class="touchpoint-grid">
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">📧 EMAIL</div>
+                        <div class="touchpoint-timing">Immediate</div>
+                        <div class="touchpoint-content">
+                            Order confirmation + shipping details. Suppress all 
+                            promotional messaging for 7 days post-purchase.
+                        </div>
+                    </div>
+
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">💬 SMS</div>
+                        <div class="touchpoint-timing">Day 3</div>
+                        <div class="touchpoint-content">
+                            "Your order has shipped" with tracking link. 
+                            Transactional only, no promotional content.
+                        </div>
+                    </div>
+
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">📧 EMAIL</div>
+                        <div class="touchpoint-timing">Day 14</div>
+                        <div class="touchpoint-content">
+                            "How are you enjoying your purchase?" feedback request. 
+                            Cross-sell complementary products.
+                        </div>
+                    </div>
+
+                    <div class="touchpoint-card">
+                        <div class="touchpoint-channel">📱 IN-APP</div>
+                        <div class="touchpoint-timing">Day 21</div>
+                        <div class="touchpoint-content">
+                            Re-engagement banner if they haven't returned. 
+                            "Complete the look" with styling suggestions.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Journey Visualization -->
+    <div class="page journey-viz">
+        <h2 class="section-title">30-Day Customer Journey View</h2>
+        <p class="section-subtitle">
+            Here's what a coordinated multi-channel experience looks like for a single customer over 30 days. 
+            Notice the spacing, variety, and strategic escalation across channels.
+        </p>
+
+        <div class="journey-timeline">
+            <div class="timeline-track">
+                <div class="timeline-line"></div>
+                <div class="timeline-days">
+                    <div class="day-marker">
+                        <div class="day-dot"></div>
+                        <div class="day-label">Day 0</div>
+                    </div>
+                    <div class="day-marker">
+                        <div class="day-dot"></div>
+                        <div class="day-label">Day 7</div>
+                    </div>
+                    <div class="day-marker">
+                        <div class="day-dot"></div>
+                        <div class="day-label">Day 14</div>
+                    </div>
+                    <div class="day-marker">
+                        <div class="day-dot"></div>
+                        <div class="day-label">Day 21</div>
+                    </div>
+                    <div class="day-marker">
+                        <div class="day-dot"></div>
+                        <div class="day-label">Day 30</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="journey-channels">
+                <div class="channel-timeline">
+                    <div class="channel-timeline-header">
+                        <div class="channel-timeline-icon">📧</div>
+                        <div class="channel-timeline-name">Email Journey</div>
+                    </div>
+                    <div class="channel-events">
+                        <div class="event-bubble">
+                            <div class="event-day">Day 0</div>
+                            <div class="event-action">Welcome Email</div>
+                            <div class="event-desc">First purchase confirmation + brand story</div>
+                        </div>
+                        <div class="event-bubble">
+                            <div class="event-day">Day 3</div>
+                            <div class="event-action">Getting Started</div>
+                            <div class="event-desc">Product care tips + styling guide</div>
+                        </div>
+                        <div class="event-bubble">
+                            <div class="event-day">Day 10</div>
+                            <div class="event-action">New Arrivals</div>
+                            <div class="event-desc">Personalized recommendations</div>
+                        </div>
+                        <div class="event-bubble">
+                            <div class="event-day">Day 17</div>
+                            <div class="event-action">Flash Sale Alert</div>
+                            <div class="event-desc">24-hour exclusive access</div>
+                        </div>
+                        <div class="event-bubble">
+                            <div class="event-day">Day 25</div>
+                            <div class="event-action">Re-stock Alert</div>
+                            <div class="event-desc">Viewed items back in stock</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="channel-timeline">
+                    <div class="channel-timeline-header">
+                        <div class="channel-timeline-icon">💬</div>
+                        <div class="channel-timeline-name">SMS Journey</div>
+                    </div>
+                    <div class="channel-events">
+                        <div class="event-bubble">
+                            <div class="event-day">Day 1</div>
+                            <div class="event-action">Shipment Update</div>
+                            <div class="event-desc">Order shipped with tracking</div>
+                        </div>
+                        <div class="event-bubble">
+                            <div class="event-day">Day 18</div>
+                            <div class="event-action">Flash Sale SMS</div>
+                            <div class="event-desc">Only sent because email opened but no click</div>
+                        </div>
+                        <div class="event-bubble">
+                            <div class="event-day">Day 28</div>
+                            <div class="event-action">Cart Reminder</div>
+                            <div class="event-desc">Abandoned cart from Day 27</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="channel-timeline">
+                    <div class="channel-timeline-header">
+                        <div class="channel-timeline-icon">📱</div>
+                        <div class="channel-timeline-name">In-App Experience</div>
+                    </div>
+                    <div class="channel-events">
+                        <div class="event-bubble">
+                            <div class="event-day">Day 5</div>
+                            <div class="event-action">Profile Complete Prompt</div>
+                            <div class="event-desc">Incentive to add preferences</div>
+                        </div>
+                        <div class="event-bubble">
+                            <div class="event-day">Day 12</div>
+                            <div class="event-action">Wishlist Reminder</div>
+                            <div class="event-desc">Price drops on saved items</div>
+                        </div>
+                        <div class="event-bubble">
+                            <div class="event-day">Day 22</div>
+                            <div class="event-action">Loyalty Progress</div>
+                            <div class="event-desc">$50 away from free shipping tier</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="channel-timeline">
+                    <div class="channel-timeline-header">
+                        <div class="channel-timeline-icon">🔔</div>
+                        <div class="channel-timeline-name">Push Notifications</div>
+                    </div>
+                    <div class="channel-events">
+                        <div class="event-bubble">
+                            <div class="event-day">Day 3</div>
+                            <div class="event-action">Delivery Notification</div>
+                            <div class="event-desc">Package delivered confirmation</div>
+                        </div>
+                        <div class="event-bubble">
+                            <div class="event-day">Day 19</div>
+                            <div class="event-action">Flash Sale Reminder</div>
+                            <div class="event-desc">4 hours left - only if email + SMS ignored</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="page tech">
+        <h2 class="section-title">Technology Stack & Integration</h2>
+        <p class="section-subtitle">
+            Building true cross-channel orchestration required consolidating tools and creating a unified 
+            customer data platform. Here's the tech architecture that powered the orchestration engine.
+        </p>
+
+        <div class="tech-stack">
+            <div class="tech-category">
+                <div class="tech-category-title">Customer Data Layer</div>
+                <div class="tech-tools">
+                    <div class="tech-tool">
+                        <div class="tech-tool-name">Segment CDP</div>
+                        <div class="tech-tool-purpose">
+                            Central hub collecting data from all channels. Single customer view with 
+                            unified event tracking, profile enrichment, and real-time audience building.
+                        </div>
+                        <div class="tech-tool-integration">Core orchestration brain</div>
+                    </div>
+
+                    <div class="tech-tool">
+                        <div class="tech-tool-name">Snowflake Data Warehouse</div>
+                        <div class="tech-tool-purpose">
+                            Historical data storage and advanced analytics. Powers predictive models 
+                            for churn risk, LTV scoring, and next-best-action recommendations.
+                        </div>
+                        <div class="tech-tool-integration">Feeds ML models + reporting</div>
+                    </div>
+
+                    <div class="tech-tool">
+                        <div class="tech-tool-name">Census (Reverse ETL)</div>
+                        <div class="tech-tool-purpose">
+                            Syncs enriched data from warehouse back to marketing tools. Keeps 
+                            all channels updated with latest customer attributes and scores.
+                        </div>
+                        <div class="tech-tool-integration">Data activation layer</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-category">
+                <div class="tech-category-title">Orchestration & Automation</div>
+                <div class="tech-tools">
+                    <div class="tech-tool">
+                        <div class="tech-tool-name">Braze</div>
+                        <div class="tech-tool-purpose">
+                            Primary orchestration engine managing email, push, in-app, and SMS. 
+                            Canvas workflows coordinate timing and suppression logic across channels.
+                        </div>
+                        <div class="tech-tool-integration">Campaign execution hub</div>
+                    </div>
+
+                    <div class="tech-tool">
+                        <div class="tech-tool-name">Zapier + Make</div>
+                        <div class="tech-tool-purpose">
+                            Connects edge case tools and handles custom workflows. Bridges gaps 
+                            between systems not natively integrated with main stack.
+                        </div>
+                        <div class="tech-tool-integration">Integration glue</div>
+                    </div>
+
+                    <div class="tech-tool">
+                        <div class="tech-tool-name">Hightouch</div>
+                        <div class="tech-tool-purpose">
+                            Alternative reverse ETL for specific use cases. Syncs audience segments 
+                            to advertising platforms for paid media coordination.
+                        </div>
+                        <div class="tech-tool-integration">Paid media syncing</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-category">
+                <div class="tech-category-title">Channel Execution Tools</div>
+                <div class="tech-tools">
+                    <div class="tech-tool">
+                        <div class="tech-tool-name">Braze (Email + SMS)</div>
+                        <div class="tech-tool-purpose">
+                            Consolidated email and SMS into single platform. Shared liquid logic, 
+                            unified suppression lists, and coordinated send timing.
+                        </div>
+                        <div class="tech-tool-integration">Previously HubSpot + Attentive</div>
+                    </div>
+
+                    <div class="tech-tool">
+                        <div class="tech-tool-name">Braze (Push + In-App)</div>
+                        <div class="tech-tool-purpose">
+                            Native push notification and in-app messaging. Coordinates with email/SMS 
+                            automatically through Canvas workflows.
+                        </div>
+                        <div class="tech-tool-integration">Previously OneSignal + Custom</div>
+                    </div>
+
+                    <div class="tech-tool">
+                        <div class="tech-tool-name">Lob</div>
+                        <div class="tech-tool-purpose">
+                            Direct mail for high-value segments. Triggered based on digital behavior 
+                            and integrated into overall customer journey logic.
+                        </div>
+                        <div class="tech-tool-integration">Physical touchpoint layer</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-category">
+                <div class="tech-category-title">Analytics & Attribution</div>
+                <div class="tech-tools">
+                    <div class="tech-tool">
+                        <div class="tech-tool-name">Amplitude</div>
+                        <div class="tech-tool-purpose">
+                            Product analytics tracking user behavior across app and web. Powers 
+                            behavioral triggers and engagement scoring models.
+                        </div>
+                        <div class="tech-tool-integration">Behavioral data source</div>
+                    </div>
+
+                    <div class="tech-tool">
+                        <div class="tech-tool-name">Looker</div>
+                        <div class="tech-tool-purpose">
+                            Unified reporting dashboard showing cross-channel performance. Custom 
+                            attribution models track which channels drive conversions.
+                        </div>
+                        <div class="tech-tool-integration">Business intelligence layer</div>
+                    </div>
+
+                    <div class="tech-tool">
+                        <div class="tech-tool-name">Rockerbox</div>
+                        <div class="tech-tool-purpose">
+                            Marketing attribution platform tracking full customer journey. Shows 
+                            channel contribution and identifies optimal touchpoint sequences.
+                        </div>
+                        <div class="tech-tool-integration">Multi-touch attribution</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personalization Engine -->
+    <div class="page personalization">
+        <h2 class="section-title">Intelligent Segmentation & Personalization</h2>
+        <p class="section-subtitle">
+            True orchestration requires understanding who gets what message when. I built a dynamic segmentation 
+            engine that routes customers through personalized journeys based on behavior, preferences, and value.
+        </p>
+
+        <div class="segmentation-visual">
+            <div class="segment-cards">
+                <div class="segment-card">
+                    <div class="segment-header">
+                        <div class="segment-avatar">🌟</div>
+                        <div class="segment-info">
+                            <div class="segment-name">VIP High-Value</div>
+                            <div class="segment-size">8% of database (12,400 customers)</div>
+                        </div>
+                    </div>
+
+                    <div class="segment-criteria">
+                        <div class="segment-criteria-title">Segment Criteria</div>
+                        <div class="segment-criteria-list">
+                            • LTV >$1,000 or 5+ purchases<br>
+                            • 60%+ email engagement rate<br>
+                            • Active in last 30 days<br>
+                            • SMS opted-in
+                        </div>
+                    </div>
+
+                    <div class="segment-journey">
+                        <strong>Journey Treatment:</strong> Maximum touchpoints across all channels. 
+                        Early access to sales, exclusive products, personal shopper access via SMS, 
+                        VIP-only direct mail, concierge-level CS. Monthly personalized emails with 
+                        curated selections. SMS for time-sensitive opportunities.
+                    </div>
+                </div>
+
+                <div class="segment-card">
+                    <div class="segment-header">
+                        <div class="segment-avatar">💎</div>
+                        <div class="segment-info">
+                            <div class="segment-name">Engaged Regulars</div>
+                            <div class="segment-size">23% of database (35,650 customers)</div>
+                        </div>
+                    </div>
+
+                    <div class="segment-criteria">
+                        <div class="segment-criteria-title">Segment Criteria</div>
+                        <div class="segment-criteria-list">
+                            • LTV $300-$1,000<br>
+                            • 2-4 purchases lifetime<br>
+                            • 35-60% email engagement<br>
+                            • Active in last 60 days
+                        </div>
+                    </div>
+
+                    <div class="segment-journey">
+                        <strong>Journey Treatment:</strong> Email-primary with strategic SMS. 
+                        3-4 emails per week with personalized product recommendations. Push notifications 
+                        for cart abandonment and flash sales. In-app badges for loyalty progress. 
+                        Occasional SMS for major promotions (2x per month max).
+                    </div>
+                </div>
+
+                <div class="segment-card">
+                    <div class="segment-header">
+                        <div class="segment-avatar">🌱</div>
+                        <div class="segment-info">
+                            <div class="segment-name">New Customers</div>
+                            <div class="segment-size">15% of database (23,250 customers)</div>
+                        </div>
+                    </div>
+
+                    <div class="segment-criteria">
+                        <div class="segment-criteria-title">Segment Criteria</div>
+                        <div class="segment-criteria-list">
+                            • First purchase within 30 days<br>
+                            • Single purchase so far<br>
+                            • Any engagement level<br>
+                            • Still learning brand
+                        </div>
+                    </div>
+
+                    <div class="segment-journey">
+                        <strong>Journey Treatment:</strong> Onboarding-focused email series over 
+                        14 days. Educational content about product care, styling tips, brand story. 
+                        Light promotional mix (70% education, 30% promotion). In-app guides for 
+                        loyalty program. No SMS until second purchase to avoid early opt-outs.
+                    </div>
+                </div>
+
+                <div class="segment-card">
+                    <div class="segment-header">
+                        <div class="segment-avatar">😴</div>
+                        <div class="segment-info">
+                            <div class="segment-name">At-Risk / Dormant</div>
+                            <div class="segment-size">31% of database (48,050 customers)</div>
+                        </div>
+                    </div>
+
+                    <div class="segment-criteria">
+                        <div class="segment-criteria-title">Segment Criteria</div>
+                        <div class="segment-criteria-list">
+                            • No purchase in 90+ days<br>
+                            • Previously active (2+ purchases)<br>
+                            • Email engagement declining<br>
+                            • Churn risk score >60%
+                        </div>
+                    </div>
+
+                    <div class="segment-journey">
+                        <strong>Journey Treatment:</strong> Win-back sequence starting with email. 
+                        Reduced frequency (1-2 emails per week) with high-value content only. 
+                        "We miss you" messaging with special incentives. SMS escalation if email 
+                        fails (special offer). Direct mail postcard for high-LTV dormants. 
+                        In-app messaging suppressed to reduce fatigue.
+                    </div>
+                </div>
+
+                <div class="segment-card">
+                    <div class="segment-header">
+                        <div class="segment-avatar">🔇</div>
+                        <div class="segment-info">
+                            <div class="segment-name">Low Engagement</div>
+                            <div class="segment-size">18% of database (27,900 customers)</div>
+                        </div>
+                    </div>
+
+                    <div class="segment-criteria">
+                        <div class="segment-criteria-title">Segment Criteria</div>
+                        <div class="segment-criteria-list">
+                            • <15% email open rate<br>
+                            • Active but not engaging<br>
+                            • 1-2 purchases lifetime<br>
+                            • Showing fatigue signals
+                        </div>
+                    </div>
+
+                    <div class="segment-journey">
+                        <strong>Journey Treatment:</strong> Dramatically reduced frequency. 
+                        1 email per week maximum, only highest-value content (new arrivals, major sales). 
+                        No SMS unless they specifically opted in recently. No push notifications. 
+                        Channel preference survey to understand preferred communication style.
+                    </div>
+                </div>
+
+                <div class="segment-card">
+                    <div class="segment-header">
+                        <div class="segment-avatar">🚀</div>
+                        <div class="segment-info">
+                            <div class="segment-name">High-Intent Browsers</div>
+                            <div class="segment-size">5% of database (7,750 customers)</div>
+                        </div>
+                    </div>
+
+                    <div class="segment-criteria">
+                        <div class="segment-criteria-title">Segment Criteria</div>
+                        <div class="segment-criteria-list">
+                            • 3+ site visits in last 7 days<br>
+                            • High browse activity<br>
+                            • No purchase yet this month<br>
+                            • Cart abandonment(s)
+                        </div>
+                    </div>
+
+                    <div class="segment-journey">
+                        <strong>Journey Treatment:</strong> Conversion-focused journey. Email with 
+                        browsed product recommendations + social proof. Push notification for cart 
+                        reminders. In-app dynamic banners showing viewed items. SMS if cart value >$150 
+                        after 24 hours. "Complete your look" bundle suggestions. Time-limited 
+                        incentive to drive urgency.
+                    </div>
+                </div>
+            </div>
+
+            <div class="logic-tree">
+                <div class="tree-title">Dynamic Message Routing Logic Example</div>
+                
+                <div class="tree-node">
+                    <div class="tree-condition">Trigger: New Promo Campaign Launch</div>
+                    <div class="tree-action">Check customer segment and recent engagement</div>
+                    <div class="tree-detail">Routing decision made in real-time based on 15+ data points</div>
+
+                    <div class="tree-branches">
+                        <div class="tree-node">
+                            <div class="tree-condition">IF: VIP Segment</div>
+                            <div class="tree-action">→ SMS immediately (early access)</div>
+                            <div class="tree-detail">Email 4 hours later if no purchase</div>
+                        </div>
+
+                        <div class="tree-node">
+                            <div class="tree-condition">IF: Engaged Regular + Email Preferred</div>
+                            <div class="tree-action">→ Email first at optimal send time</div>
+                            <div class="tree-detail">Push 6 hours later if opened but no click</div>
+                        </div>
+
+                        <div class="tree-node">
+                            <div class="tree-condition">IF: New Customer</div>
+                            <div class="tree-action">→ Email only (relationship building)</div>
+                            <div class="tree-detail">Softer messaging, educational angle</div>
+                        </div>
+
+                        <div class="tree-node">
+                            <div class="tree-condition">IF: Low Engagement</div>
+                            <div class="tree-action">→ Skip this campaign</div>
+                            <div class="tree-detail">Reserve touchpoint for higher-value message</div>
+                        </div>
+
+                        <div class="tree-node">
+                            <div class="tree-condition">IF: At-Risk</div>
+                            <div class="tree-action">→ Email with win-back angle</div>
+                            <div class="tree-detail">Higher incentive, different creative</div>
+                        </div>
+
+                        <div class="tree-node">
+                            <div class="tree-condition">IF: Mobile-Only User</div>
+                            <div class="tree-action">→ In-app banner + push combo</div>
+                            <div class="tree-detail">Skip email, prioritize mobile channels</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testing -->
+    <div class="page testing">
+        <h2 class="section-title">Testing & Optimization</h2>
+        <p class="section-subtitle">
+            I ran systematic tests to validate orchestration decisions and continuously optimize the 
+            cross-channel experience. Here are key tests that shaped the final strategy.
+        </p>
+
+        <div class="test-results">
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title-section">
+                        <div class="test-hypothesis">Hypothesis: Channel Sequencing</div>
+                        <div class="test-title">Does channel order impact conversion rates?</div>
+                    </div>
+                    <div class="test-result-badge">+67% WINNER</div>
+                </div>
+
+                <div class="test-comparison">
+                    <div class="test-variant">
+                        <div class="variant-label">Control: Simultaneous Send</div>
+                        <div class="variant-description">
+                            Email and push sent at same time for cart abandonment. 
+                            Customer receives both messages within minutes.
+                        </div>
+                        <div class="variant-metrics">
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">8.2%</div>
+                                <div class="variant-metric-label">Conversion Rate</div>
+                            </div>
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">23%</div>
+                                <div class="variant-metric-label">Unsubscribe Rate</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="test-variant winner">
+                        <div class="variant-label">Winner: Sequential with Delay</div>
+                        <div class="variant-description">
+                            Email first. Push only sent 4 hours later if email unopened. 
+                            Reduced redundancy, better customer experience.
+                        </div>
+                        <div class="variant-metrics">
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">13.7%</div>
+                                <div class="variant-metric-label">Conversion Rate</div>
+                            </div>
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">11%</div>
+                                <div class="variant-metric-label">Unsubscribe Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title-section">
+                        <div class="test-hypothesis">Hypothesis: Frequency Capping</div>
+                        <div class="test-title">Does limiting messages improve engagement?</div>
+                    </div>
+                    <div class="test-result-badge">+124% WINNER</div>
+                </div>
+
+                <div class="test-comparison">
+                    <div class="test-variant">
+                        <div class="variant-label">Control: Unlimited</div>
+                        <div class="variant-description">
+                            Customers receive all relevant messages across all channels. 
+                            Average 11 messages per week (email + SMS + push + in-app).
+                        </div>
+                        <div class="variant-metrics">
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">14.3%</div>
+                                <div class="variant-metric-label">Overall Engagement</div>
+                            </div>
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">$47</div>
+                                <div class="variant-metric-label">Revenue per User</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="test-variant winner">
+                        <div class="variant-label">Winner: Smart Frequency Cap</div>
+                        <div class="variant-description">
+                            Maximum 6 marketing messages per week across all channels. 
+                            Prioritizes highest-value messages. Better customer experience.
+                        </div>
+                        <div class="variant-metrics">
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">32.1%</div>
+                                <div class="variant-metric-label">Overall Engagement</div>
+                            </div>
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">$89</div>
+                                <div class="variant-metric-label">Revenue per User</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title-section">
+                        <div class="test-hypothesis">Hypothesis: SMS Timing</div>
+                        <div class="test-title">When should SMS escalate after email?</div>
+                    </div>
+                    <div class="test-result-badge">+41% WINNER</div>
+                </div>
+
+                <div class="test-comparison">
+                    <div class="test-variant">
+                        <div class="variant-label">Variant A: 2-Hour Delay</div>
+                        <div class="variant-description">
+                            SMS sent 2 hours after email if no engagement. 
+                            Faster follow-up but potentially annoying.
+                        </div>
+                        <div class="variant-metrics">
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">16.8%</div>
+                                <div class="variant-metric-label">SMS Conversion</div>
+                            </div>
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">18%</div>
+                                <div class="variant-metric-label">Opt-Out Rate</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="test-variant winner">
+                        <div class="variant-label">Winner: 6-Hour Delay</div>
+                        <div class="variant-description">
+                            SMS sent 6 hours after email for most campaigns. 
+                            Better balance of timing and customer experience.
+                        </div>
+                        <div class="variant-metrics">
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">23.7%</div>
+                                <div class="variant-metric-label">SMS Conversion</div>
+                            </div>
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">7%</div>
+                                <div class="variant-metric-label">Opt-Out Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title-section">
+                        <div class="test-hypothesis">Hypothesis: Personalization Depth</div>
+                        <div class="test-title">How much personalization is optimal?</div>
+                    </div>
+                    <div class="test-result-badge">+93% WINNER</div>
+                </div>
+
+                <div class="test-comparison">
+                    <div class="test-variant">
+                        <div class="variant-label">Control: Basic Segmentation</div>
+                        <div class="variant-description">
+                            Segment by purchase history only (1x buyer vs repeat). 
+                            Same message within segment across all channels.
+                        </div>
+                        <div class="variant-metrics">
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">19.4%</div>
+                                <div class="variant-metric-label">Campaign CTR</div>
+                            </div>
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">4.2%</div>
+                                <div class="variant-metric-label">Conversion Rate</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="test-variant winner">
+                        <div class="variant-label">Winner: Multi-Attribute Personalization</div>
+                        <div class="variant-description">
+                            Segment by: purchase history + browsing behavior + channel preference + 
+                            engagement level + product affinity. Hyper-targeted messaging.
+                        </div>
+                        <div class="variant-metrics">
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">37.5%</div>
+                                <div class="variant-metric-label">Campaign CTR</div>
+                            </div>
+                            <div class="variant-metric">
+                                <div class="variant-metric-value">8.1%</div>
+                                <div class="variant-metric-label">Conversion Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div class="page results">
+        <h2 class="section-title">The Impact</h2>
+        
+        <div class="results-hero">
+            <div class="results-main-stat">267%</div>
+            <div class="results-main-label">Increase in Cross-Channel Engagement</div>
+        </div>
+
+        <div class="results-grid">
+            <div class="result-card">
+                <div class="result-icon">📊</div>
+                <div class="result-value">+267%</div>
+                <div class="result-label">Overall Engagement</div>
+                <div class="result-detail">Across all channels combined</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">💰</div>
+                <div class="result-value">+189%</div>
+                <div class="result-label">Conversion Rate</div>
+                <div class="result-detail">From orchestrated campaigns</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">📧</div>
+                <div class="result-value">+142%</div>
+                <div class="result-label">Email Performance</div>
+                <div class="result-detail">18.2% → 44.1% open rate</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">💬</div>
+                <div class="result-value">+78%</div>
+                <div class="result-label">SMS Conversion</div>
+                <div class="result-detail">Better targeting + timing</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">🔔</div>
+                <div class="result-value">+234%</div>
+                <div class="result-label">Push Engagement</div>
+                <div class="result-detail">Strategic use vs spam</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">📱</div>
+                <div class="result-value">+156%</div>
+                <div class="result-label">In-App Interaction</div>
+                <div class="result-detail">Context-aware messaging</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">🚫</div>
+                <div class="result-value">-43%</div>
+                <div class="result-label">Unsubscribe Rate</div>
+                <div class="result-detail">Less fatigue, better experience</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">⚡</div>
+                <div class="result-value">-67%</div>
+                <div class="result-label">Message Overlap</div>
+                <div class="result-detail">Eliminated redundancy</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">💵</div>
+                <div class="result-value">+$4.2M</div>
+                <div class="result-label">Incremental Revenue</div>
+                <div class="result-detail">First 6 months</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">📈</div>
+                <div class="result-value">+112%</div>
+                <div class="result-label">Customer LTV</div>
+                <div class="result-detail">From better engagement</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">⏱️</div>
+                <div class="result-value">-58%</div>
+                <div class="result-label">Campaign Setup Time</div>
+                <div class="result-detail">Unified platform efficiency</div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-icon">🎯</div>
+                <div class="result-value">89%</div>
+                <div class="result-label">Attribution Accuracy</div>
+                <div class="result-detail">Clear channel contribution</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Learnings -->
+    <div class="page learnings">
+        <h2 class="section-title">Key Learnings & Best Practices</h2>
+        <p class="section-subtitle">
+            Building true multi-channel orchestration taught us valuable lessons that shaped our approach 
+            and can guide future lifecycle marketing strategies.
+        </p>
+
+        <div class="learning-grid">
+            <div class="learning-card">
+                <div class="learning-icon">🧠</div>
+                <div class="learning-title">Tech Consolidation is Non-Negotiable</div>
+                <div class="learning-text">
+                    True orchestration is impossible with 5+ disconnected tools. We had to consolidate to a 
+                    single platform (Braze) that could manage all digital channels. The migration was painful 
+                    but essential. Trying to "orchestrate" across disparate tools via Zapier workflows is 
+                    duct tape, not infrastructure. Invest in proper tooling upfront or accept you can't truly 
+                    orchestrate.
+                </div>
+            </div>
+
+            <div class="learning-card">
+                <div class="learning-icon">⏰</div>
+                <div class="learning-title">Timing Matters More Than We Thought</div>
+                <div class="learning-text">
+                    The gap between messages is critical. Sending email and SMS simultaneously feels efficient 
+                    but kills performance. The sweet spot was 4-6 hours between channel touchpoints for most 
+                    campaigns. Too fast = annoying redundancy. Too slow = missed urgency window. This timing 
+                    became one of our highest-leverage optimization areas.
+                </div>
+            </div>
+
+            <div class="learning-card">
+                <div class="learning-icon">🎭</div>
+                <div class="learning-title">Not All Channels Are Created Equal</div>
+                <div class="learning-text">
+                    SMS has 10x the engagement of email but 100x the annoyance factor when overused. Push 
+                    notifications drive immediate action but degrade quickly with frequency. In-app messaging 
+                    is contextual gold but easy to overdo. We learned to treat each channel according to its 
+                    unique strengths and fragility. Channel strategy isn't "use them all" — it's "use each 
+                    perfectly."
+                </div>
+            </div>
+
+            <div class="learning-card">
+                <div class="learning-icon">🎯</div>
+                <div class="learning-title">Suppression Logic is the Real Magic</div>
+                <div class="learning-text">
+                    The wins didn't come from sending more messages — they came from sending fewer, better-timed 
+                    messages. Our most powerful "campaigns" were actually suppression rules: don't message recent 
+                    purchasers, don't duplicate across channels, don't interrupt high-intent moments. We spent 
+                    more time on what NOT to send than what to send. That's where orchestration lives.
+                </div>
+            </div>
+
+            <div class="learning-card">
+                <div class="learning-icon">📊</div>
+                <div class="learning-title">Attribution Gets Messy Fast</div>
+                <div class="learning-text">
+                    With multiple channels touching customers, attribution became complicated. Email gets the 
+                    click but SMS drove awareness? Push reminded but in-app closed? We implemented multi-touch 
+                    attribution but also tracked "channel assist" metrics. The real insight: orchestration works 
+                    as a system. Trying to credit individual channels misses the point.
+                </div>
+            </div>
+
+            <div class="learning-card">
+                <div class="learning-icon">👥</div>
+                <div class="learning-title">Organizational Alignment is Half the Battle</div>
+                <div class="learning-text">
+                    The tech stack was easier to fix than the org chart. Email, SMS, push, and in-app were owned 
+                    by different teams with different KPIs. We had to align everyone on shared goals (customer 
+                    engagement, LTV, conversion) vs channel-specific vanity metrics. Orchestration requires 
+                    organizational orchestration first. One team, one goal, one customer experience.
+                </div>
+            </div>
+
+            <div class="learning-card">
+                <div class="learning-icon">🔄</div>
+                <div class="learning-title">Start Simple, Then Layer Complexity</div>
+                <div class="learning-text">
+                    We tried to build the perfect orchestration engine on day one and almost broke everything. 
+                    The winning approach: start with basic rules (no duplicate messages within 4 hours), prove 
+                    value, then add sophistication (behavioral triggers, predictive routing, dynamic frequency). 
+                    Complexity without foundation fails. Foundation without iteration stagnates.
+                </div>
+            </div>
+
+            <div class="learning-card">
+                <div class="learning-icon">💡</div>
+                <div class="learning-title">Customer Preferences Trump Our Strategy</div>
+                <div class="learning-text">
+                    We built elaborate routing logic, but the biggest win was simply asking customers how they 
+                    want to hear from us. Some people love SMS. Others hate it. Some check email religiously. 
+                    Others never open it. Preference center enrollment jumped 10x when we explained "this helps 
+                    us annoy you less." Respecting preferences isn't just nice — it's performance optimization.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToPage(index) {
+            const pages = document.querySelectorAll('.page');
+            pages[index].scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const pages = document.querySelectorAll('.page');
+            const navDots = document.querySelectorAll('.nav-dot');
+            
+            let current = 0;
+            pages.forEach((page, index) => {
+                const rect = page.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                    current = index;
+                }
+            });
+
+            navDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === current);
+            });
+        });
+    </script>
+</body>
+</html>
