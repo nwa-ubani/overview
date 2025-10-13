@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <nav style="position:fixed; top:0; width:100%; background:#222; color:#fff; padding:10px; z-index:100;">
-  <a href="index.html" style="color:#fff; margin-right:15px;">Home</a>
-  <a href="project.html" style="color:#fff; margin-right:15px;">Customer Journey</a>
-  <a href="multichannel.html" style="color:#fff; margin-right:15px;">Multi-channel</a>
-  <a href="onboarding.html" style="color:#fff; margin-right:15px;">Welcome Series</a>
-  <a href="positioning.html" style="color:#fff; margin-right:15px;">Positioning</a>
-  <!-- Add more links for each HTML file -->
-</nav>
-<div style="height:40px;"></div> <!-- Adds space so content is not hidden under the navbar -->
-  <!-- Add more links for each HTML file -->
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome Series Redesign</title>
@@ -423,9 +413,152 @@
             font-size: 0.85rem;
             opacity: 0.7;
         }
+        
+        /* --- RESPONSIVE DESIGN ADDITIONS --- */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px 5px;
+            height: auto;
+        }
+        nav a {
+            margin: 5px 8px;
+            font-size: 0.9rem;
+        }
+        .page {
+            padding: 80px 15px 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .problem-grid, .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+            .email-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Hero */
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+            .project-meta {
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 30px;
+            }
+            .meta-value {
+                font-size: 1.1rem;
+            }
+            .alias-note {
+                top: 50px;
+                right: 10px;
+                font-size: 0.7rem;
+                padding: 5px 10px;
+            }
+            .nav {
+                display: none;
+            }
+
+            /* Problem */
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .problem-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .stat-card {
+                padding: 30px;
+            }
+            .stat-number {
+                font-size: 3rem;
+            }
+
+            /* Journey Map - Stack Stages */
+            .journey-stages {
+                flex-direction: column;
+                gap: 40px;
+                margin-top: 40px;
+            }
+            .journey-stages::before {
+                display: none;
+            }
+            .stage {
+                text-align: left;
+                display: flex;
+                align-items: flex-start;
+                padding: 0;
+            }
+            .stage-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+                margin: 0 15px 0 0;
+                flex-shrink: 0;
+            }
+            .stage-title {
+                font-size: 1.3rem;
+                margin-bottom: 5px;
+            }
+            .stage-desc {
+                font-size: 0.85rem;
+            }
+
+            /* Email Wireframes */
+            .email-grid {
+                grid-template-columns: 1fr; /* Stack emails */
+            }
+            .email-preview {
+                min-height: 250px;
+            }
+            .email-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            /* Strategy */
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+            .strategy-card {
+                padding: 30px;
+            }
+
+            /* Results */
+            .results-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .result-number {
+                font-size: 2.5rem;
+            }
+            .result-sublabel {
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <nav style="position:fixed; top:0; width:100%; background:#222; color:#fff; padding:10px; z-index:100;">
+        <a href="index.html" style="color:#fff; margin-right:15px;">Home</a>
+        <a href="project.html" style="color:#fff; margin-right:15px;">Customer Journey</a>
+        <a href="multichannel.html" style="color:#fff; margin-right:15px;">Multi-channel</a>
+        <a href="onboarding.html" style="color:#fff; margin-right:15px;">Welcome Series</a>
+        <a href="positioning.html" style="color:#fff; margin-right:15px;">Positioning</a>
+        <!-- Add more links for each HTML file -->
+    </nav>
+    <div style="height:40px;"></div> <!-- Adds space so content is not hidden under the navbar -->
+
     <!-- Navigation Dots -->
     <div class="nav">
         <div class="nav-dot active" onclick="scrollToPage(0)"></div>
