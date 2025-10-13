@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <nav style="position:fixed; top:0; width:100%; background:#222; color:#fff; padding:10px; z-index:100;">
-  <a href="index.html" style="color:#fff; margin-right:15px;">Home</a>
-  <a href="project.html" style="color:#fff; margin-right:15px;">Customer Journey</a>
-  <a href="multichannel.html" style="color:#fff; margin-right:15px;">Multi-channel</a>
-  <a href="onboarding.html" style="color:#fff; margin-right:15px;">Welcome Series Redesign</a>
-  <a href="positioning.html" style="color:#fff; margin-right:15px;">Positioning</a>
-  <!-- Add more links for each HTML file -->
-</nav>
-<div style="height:40px;"></div> <!-- Adds space so content is not hidden under the navbar -->
-  <!-- Add more links for each HTML file -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faith Nwaubani - Your Growth Catalyst</title>
+    <title>Faith Nwaubani - Portfolio Overview</title>
     <style>
+        /* General Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -25,86 +16,101 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #0a0a0a;
             color: #ffffff;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        .presentation {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
+        /* Fixed Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #222;
+            color: #fff;
+            padding: 10px;
+            z-index: 100;
+            border-bottom: 1px solid #333;
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
         }
-
-        .slide {
-            display: none;
-            width: 95%;
-            max-width: 1200px;
-            height: 90vh;
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            overflow-y: auto;
-            animation: slideIn 0.8s ease-out;
+        nav a {
+            color: #fff;
+            margin: 5px 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ffd700;
+        }
+        .nav-space {
+             height: 45px; /* Space for the fixed nav */
         }
 
-        .slide.active {
-            display: block;
+        /* Page/Section Container */
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align content to top of section */
+            align-items: center;
+            padding: 100px 40px 80px 40px; /* Top padding for visibility */
+            position: relative;
+            background: #0d0d0d; /* Default section background */
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        /* Accent Color Theme - Gold/Yellow */
+        .accent-text {
+            color: #ffd700;
         }
-
-        .slide h1 {
-            font-size: 3.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
+        .accent-gradient-text {
             background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+        .accent-border {
+             border-color: #ffd700 !important;
         }
 
-        .slide h2 {
-            font-size: 2.8rem;
+        /* Typography */
+        h1 {
+            font-size: 4.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            line-height: 1.1;
+        }
+        h2 {
+            font-size: 3.5rem;
             margin-bottom: 1.5rem;
             text-align: center;
             color: #ffd700;
             border-bottom: 3px solid #ffd700;
             padding-bottom: 10px;
+            width: 100%;
+            max-width: 900px;
         }
-
-        .slide h3 {
+        h3 {
             font-size: 2rem;
             margin-bottom: 1rem;
             color: #ffed4e;
         }
-
         .subtitle {
             font-size: 1.8rem;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 4rem;
             opacity: 0.9;
             color: #e0e0e0;
+            max-width: 900px;
         }
 
+        /* Layout Elements */
         .metrics-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             margin: 30px 0;
+            max-width: 1200px;
+            width: 100%;
         }
 
         .metric-box {
@@ -116,13 +122,6 @@
             text-align: center;
             transition: all 0.4s ease;
             cursor: pointer;
-        }
-
-        .metric-box:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: #ffd700;
-            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.2);
-            background: rgba(255, 255, 255, 0.08);
         }
 
         .metric-value {
@@ -140,35 +139,25 @@
         }
 
         .case-study-container {
-            background: rgba(255, 255, 255, 0.05);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             border-left: 5px solid #ffd700;
             border-radius: 10px;
             padding: 30px;
-            margin: 20px 0;
-            backdrop-filter: blur(5px);
+            margin: 20px auto;
+            max-width: 1200px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
-
-        .case-study-container h3 {
-            color: #ffd700;
-            margin-bottom: 20px;
-            font-size: 2.2rem;
-        }
-
         .case-study-container p {
             font-size: 1.1rem;
             line-height: 1.6;
             margin-bottom: 15px;
-            color: #e0e0e0;
+            color: #d0d0d0;
         }
-
-        .case-study-container strong {
-            color: #ffd700;
-        }
-
         .case-study-container ul {
             margin: 15px 0 15px 20px;
+            list-style: disc;
         }
-
         .case-study-container li {
             font-size: 1.05rem;
             line-height: 1.6;
@@ -181,6 +170,8 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin: 30px 0;
+            max-width: 1200px;
+            width: 100%;
         }
 
         .timeline-card {
@@ -188,15 +179,8 @@
             border: 2px solid rgba(255, 215, 0, 0.3);
             border-radius: 15px;
             padding: 25px;
-            backdrop-filter: blur(5px);
             transition: all 0.3s ease;
         }
-
-        .timeline-card:hover {
-            transform: scale(1.05);
-            border-color: #ffd700;
-        }
-
         .timeline-card h3 {
             color: #ffd700;
             margin-bottom: 15px;
@@ -209,7 +193,8 @@
             border: 3px solid #ffd700;
             border-radius: 20px;
             padding: 40px;
-            margin: 30px 0;
+            margin: 30px auto;
+            max-width: 1000px;
         }
 
         .roi-number {
@@ -221,12 +206,23 @@
             background-clip: text;
             animation: pulse 2s ease-in-out infinite;
         }
-
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
 
+        .cta-section {
+            background: rgba(255, 215, 0, 0.15);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px auto;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* Slide Navigation Controls - Adapted for Scrolling Page Navigation */
         .nav-controls {
             position: fixed;
             bottom: 30px;
@@ -235,7 +231,6 @@
             gap: 15px;
             z-index: 1000;
         }
-
         .nav-btn {
             background: rgba(255, 215, 0, 0.8);
             color: #000;
@@ -247,20 +242,17 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .nav-btn:hover {
             background: #ffd700;
             transform: scale(1.05);
         }
-
         .nav-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
-
         .progress-indicator {
             position: fixed;
-            top: 20px;
+            top: 50px;
             right: 20px;
             background: rgba(255, 215, 0, 0.8);
             color: #000;
@@ -269,7 +261,6 @@
             font-weight: bold;
             z-index: 1000;
         }
-
         .progress-bar {
             position: fixed;
             top: 0;
@@ -279,68 +270,120 @@
             transition: width 0.5s ease;
             z-index: 1000;
         }
-
-        .cta-section {
-            background: rgba(255, 215, 0, 0.15);
-            border: 2px solid #ffd700;
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            margin: 30px 0;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .slide {
-                padding: 20px;
-                height: 95vh;
+        
+        /* --- RESPONSIVE DESIGN ADDITIONS --- */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 3.5rem;
             }
-            
-            .slide h1 {
+            h2 {
                 font-size: 2.5rem;
             }
-            
-            .slide h2 {
+            .subtitle {
+                font-size: 1.6rem;
+                padding: 0 10px;
+            }
+            .metrics-container, .timeline-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            .case-study-container h3 {
                 font-size: 2rem;
             }
-            
-            .metric-value {
-                font-size: 2rem;
+        }
+
+        @media (max-width: 768px) {
+             /* Navigation Fix for Mobile Stacking */
+            nav a {
+                margin: 5px 8px;
+                font-size: 0.85rem;
+            }
+            .nav-space {
+                 height: 70px; /* Adjust for stacked nav on small screens */
+            }
+            .page {
+                padding: 100px 15px 40px;
             }
             
-            .case-study-container {
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+                padding-bottom: 5px;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+            }
+            .metrics-container,
+            .timeline-grid {
+                grid-template-columns: 1fr; /* Stack vertically */
+                gap: 15px;
+            }
+            .metric-box, .timeline-card {
                 padding: 20px;
             }
-        }
+            .metric-value {
+                font-size: 2.5rem;
+            }
+            .metric-desc {
+                font-size: 1rem;
+            }
+            .case-study-container {
+                padding: 20px;
+                margin-top: 15px;
+            }
+            .case-study-container h3 {
+                font-size: 1.6rem;
+            }
+            .case-study-container p, .case-study-container li {
+                font-size: 1rem;
+            }
+            .roi-number {
+                font-size: 3rem;
+            }
 
-        /* Smooth scrolling for slide content */
-        .slide {
-            scrollbar-width: thin;
-            scrollbar-color: #ffd700 transparent;
-        }
-
-        .slide::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .slide::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .slide::-webkit-scrollbar-thumb {
-            background: #ffd700;
-            border-radius: 10px;
+            /* Navigation Controls */
+            .nav-controls {
+                bottom: 10px;
+                right: 50%;
+                transform: translateX(50%);
+                gap: 10px;
+                width: 95%;
+                justify-content: space-between;
+            }
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+                flex: 1;
+            }
+            .progress-indicator {
+                top: 75px;
+                right: 15px;
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="project.html">Customer Journey</a>
+      <a href="multichannel.html">Multi-channel</a>
+      <a href="onboarding.html">Welcome Series</a>
+      <a href="positioning.html">Positioning</a>
+    </nav>
+    <div class="nav-space"></div>
+
     <div class="progress-bar" id="progressBar"></div>
     <div class="progress-indicator" id="progressIndicator">1 / 11</div>
 
     <div class="presentation">
         <!-- Slide 1: Title -->
-        <div style="padding-top: 150px;" class="slide active">
-            <h1>Faith Nwaubani</h1>
+        <div class="page active" id="slide-0">
+            <h1 class="accent-gradient-text">Faith Nwaubani</h1>
             <div class="subtitle">Your Next Growth Catalyst</div>
             <div style="text-align: center; font-size: 2rem; color: #ffd700; margin: 2rem 0;">
                 Lifecycle Marketing Manager
@@ -351,8 +394,8 @@
         </div>
 
         <!-- Slide 2: Key Metrics -->
-        <div class="slide">
-            <h2>The Numbers That Matter</h2>
+        <div class="page" id="slide-1">
+            <h2 class="accent-border">The Numbers That Matter</h2>
             <div class="metrics-container">
                 <div class="metric-box">
                     <div class="metric-value">47%</div>
@@ -382,8 +425,8 @@
         </div>
 
         <!-- Slide 3: Case Study 1 -->
-        <div class="slide">
-            <h2>Case Study 1</h2>
+        <div class="page" id="slide-2">
+            <h2 class="accent-border">Case Study 1: Infrastructure Transformation</h2>
             <div class="case-study-container">
                 <h3>Complete Infrastructure Transformation</h3>
                 <p><strong>The Situation:</strong> A rapidly growing SaaS platform was hemorrhaging customers at 32% monthly churn while new acquisition had completely stagnated, creating an unsustainable death spiral that threatened the entire business model.</p>
@@ -417,8 +460,8 @@
         </div>
 
         <!-- Slide 4: Case Study 2 -->
-        <div class="slide">
-            <h2>Case Study 2 </h2>
+        <div class="page" id="slide-3">
+            <h2 class="accent-border">Case Study 2: Strategic Card Adoption Revolution</h2>
             <div class="case-study-container">
                 <h3>Strategic Card Adoption Revolution</h3>
                 <p><strong>The Challenge:</strong> Despite having a robust digital platform, physical card adoption was dismally low. Customers not using cards. Repeat usage was moderate.</p>
@@ -454,8 +497,8 @@
         </div>
 
         <!-- Slide 5: Case Study 3 -->
-        <div class="slide">
-            <h2>Case Study 3</h2>
+        <div class="page" id="slide-4">
+            <h2 class="accent-border">Case Study 3: Driving Transaction on Dormant Accounts</h2>
             <div class="case-study-container">
                 <h3>Driving Transaction on Dormant Accounts</h3>
                 <p><strong>The Problem:</strong> Thousands of customers had funded their accounts but were sitting idle. Money was there, intent was unclear, and the business was missing massive transaction volume opportunities. These "funded but not transacting" accounts represented untapped potential worth millions. While at a potential risk to churn.</p>
@@ -466,7 +509,7 @@
                 <p><strong>The Strategy:</strong></p>
                 <ul>
                     <li><strong>Account Balance with ₦5,000:</strong> Low-risk transaction incentives messaging.</li>
-                    <li><strong>Lower-Balance Segment (<₦5,000):</strong> "You're ₦1000 away from participating today" messaging with encouragement to reach the ₦5,000 threshold.</li>
+                    <li><strong>Lower-Balance Segment (&lt;₦5,000):</strong> "You're ₦1000 away from participating today" messaging with encouragement to reach the ₦5,000 threshold.</li>
                     <li><strong>Time-Sensitive Triggers:</strong> Identified optimal engagement windows—customers who hadn't transacted in 14, 30, and 60-day ranges received different urgency levels and messaging</li>
                     <li><strong>Value Demonstration:</strong> Created scenario-based content showing exactly how transactions would benefit each segment's specific situation</li>
                 </ul>
@@ -492,8 +535,8 @@
         </div>
 
         <!-- Slide 6: Case Study 4 -->
-        <div class="slide">
-            <h2>Case Study 4</h2>
+        <div class="page" id="slide-5">
+            <h2 class="accent-border">Case Study 4: Membership Platform Resurrection</h2>
             <div class="case-study-container">
                 <h3>Membership Platform Resurrection</h3>
                 <p><strong>The Crisis:</strong> A membership platform was in decline with reactivation rates plummeting to just 12%, while family plan adoption—critical for long-term value—remained stubbornly low. The business model was fundamentally broken, with acquisition costs far exceeding reactivation investment.</p>
@@ -533,8 +576,8 @@
         </div>
 
         <!-- Slide 7: Technical Excellence -->
-        <div class="slide">
-            <h2>Technical Excellence</h2>
+        <div class="page" id="slide-6">
+            <h2 class="accent-border">Technical Excellence</h2>
             <div class="metrics-container">
                 <div class="metric-box">
                     <div class="metric-value">73%</div>
@@ -561,8 +604,8 @@
         </div>
 
         <!-- Slide 8: What Faith Will Deliver -->
-        <div class="slide">
-            <h2>What Faith Will Deliver</h2>
+        <div class="page" id="slide-7">
+            <h2 class="accent-border">What Faith Will Deliver</h2>
             <div class="timeline-grid">
                 <div class="timeline-card">
                     <h3>Month 1-3: Foundation</h3>
@@ -572,7 +615,7 @@
                         <li>Advanced tracking implementation</li>
                     </ul>
                 </div>
-                <br>
+                
                 <div class="timeline-card">
                     <h3>Month 4-6: Acceleration</h3>
                     <ul>
@@ -581,7 +624,7 @@
                         <li>Up to 40% membership growth scaling</li>
                     </ul>
                 </div>
-                <br>
+                
                 <div class="timeline-card">
                     <h3>Month 7-12: Market Leadership</h3>
                     <ul>
@@ -594,9 +637,9 @@
         </div>
 
         <!-- Slide 9: Growth Formula -->
-        <div class="slide">
-            <h2>Your Growth Formula</h2>
-            <div style="text-align: center; font-size: 1.8rem; margin: 3rem 0; color: #e0e0e0;">
+        <div class="page" id="slide-8">
+            <h2 class="accent-border">Your Growth Formula</h2>
+            <div style="text-align: center; font-size: 1.8rem; margin: 3rem auto; color: #e0e0e0; max-width: 900px;">
                 Data Analysis → Strategic Segmentation → Automated Execution → Continuous Optimization → <span style="color: #ffd700; font-weight: bold;">Measurable Growth</span>
             </div>
             <div class="metrics-container">
@@ -616,9 +659,9 @@
         </div>
 
         <!-- Slide 10: Investment Case -->
-        <div class="slide">
-            <h2>The Investment Case</h2>
-            <div class="metrics-container" style="margin: 3rem 0;">
+        <div class="page" id="slide-9">
+            <h2 class="accent-border">The Investment Case</h2>
+            <div class="metrics-container" style="margin: 3rem auto;">
                 <div class="metric-box">
                     <div class="metric-desc">Annual Investment</div>
                     <div class="metric-value">~$150K</div>
@@ -638,15 +681,15 @@
         </div>
 
         <!-- Slide 11: Call to Action -->
-        <div class="slide">
-            <h1></h1>
-            <div style="text-align: center; font-size: 1.8rem; margin: 3rem 0; max-width: 800px; margin-left: auto; margin-right: auto;">
-                <p><br><br><br><br></p>
+        <div class="page" id="slide-10">
+            <h2 class="accent-border" style="margin-top: 50px;">Ready to Accelerate Growth?</h2>
+            <div style="text-align: center; font-size: 1.8rem; margin: 3rem auto; max-width: 800px;">
+                <p>Let's discuss how my data-driven strategies can transform your customer lifecycle.</p>
             </div>
             <div class="cta-section">
-                <h3>Let's discuss how you can accelerate growth</h3>
+                <h3>Contact Faith Nwaubani</h3>
                 <p style="font-size: 1.3rem; margin-top: 2rem;">
-                    Send an email to a.faithnwaubani@gmail.com
+                    Send an email to <strong class="accent-text">a.faithnwaubani@gmail.com</strong>
                 </p>
             </div>
         </div>
@@ -659,14 +702,22 @@
 
     <script>
         let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
+        const slides = document.querySelectorAll('.page');
         const totalSlides = slides.length;
 
         function updateSlide() {
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
-            });
+            // Remove active class from all slides
+            slides.forEach(slide => slide.classList.remove('active'));
             
+            // Get the target slide element
+            const targetSlide = slides[currentSlide];
+
+            if (targetSlide) {
+                // Add active class and scroll into view
+                targetSlide.classList.add('active');
+                targetSlide.scrollIntoView({ behavior: 'smooth' });
+            }
+
             document.getElementById('progressIndicator').textContent = `${currentSlide + 1} / ${totalSlides}`;
             document.getElementById('progressBar').style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
             
@@ -694,18 +745,12 @@
             }
         });
 
-        // Initialize
-        updateSlide();
+        // Initialize on load
+        window.onload = updateSlide;
 
-        // Add hover effects to metric boxes
-        document.querySelectorAll('.metric-box').forEach(box => {
-            box.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = 'translateY(-8px) scale(1.02)';
-                }, 150);
-            });
-        });
+        // Optional: Re-initialize updateSlide on window resize to ensure correct centering if layout changes
+        window.addEventListener('resize', updateSlide);
+        
     </script>
 </body>
 </html>
