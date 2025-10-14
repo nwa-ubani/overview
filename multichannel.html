@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Channel Orchestration</title>
@@ -17,6 +17,33 @@
             color: #ffffff;
             overflow-x: hidden;
         }
+        
+        /* Fixed Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #222;
+            color: #fff;
+            padding: 10px;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        nav a {
+            color: #fff;
+            margin: 5px 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #fa709a; /* Match the primary gradient color */
+        }
+        .nav-space {
+             height: 45px; /* Space for the fixed nav */
+        }
 
         .page {
             min-height: 100vh;
@@ -32,6 +59,7 @@
         .hero {
             background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             text-align: center;
+            padding-top: 100px;
         }
 
         .hero h1 {
@@ -432,11 +460,15 @@
             max-width: 1600px;
             margin-top: 60px;
             position: relative;
+            width: 100%;
         }
 
         .timeline-track {
             position: relative;
             padding: 40px 0;
+            /* Ensures this area has scroll space on mobile */
+            overflow-x: auto;
+            padding-bottom: 20px; 
         }
 
         .timeline-line {
@@ -446,6 +478,7 @@
             right: 50px;
             height: 4px;
             background: linear-gradient(90deg, #fa709a 0%, #fee140 50%, #4facfe 100%);
+            min-width: 600px; /* Ensure line extends beyond mobile screen */
         }
 
         .timeline-days {
@@ -454,10 +487,12 @@
             padding: 0 50px;
             position: relative;
             z-index: 2;
+            min-width: 600px; /* Forces this element to be wide enough to allow scrolling */
         }
 
         .day-marker {
             text-align: center;
+            flex-shrink: 0;
         }
 
         .day-dot {
@@ -514,12 +549,13 @@
         .channel-events {
             display: flex;
             gap: 15px;
-            overflow-x: auto;
+            overflow-x: auto; /* IMPORTANT: Enables horizontal swipe */
             padding-bottom: 10px;
         }
 
         .event-bubble {
-            min-width: 200px;
+            min-width: 220px; /* Ensure bubbles are readable and force scroll */
+            flex-shrink: 0; /* Prevents bubbles from shrinking on smaller screens */
             background: rgba(250, 112, 154, 0.1);
             padding: 20px;
             border-radius: 16px;
@@ -964,7 +1000,7 @@
             line-height: 1.8;
         }
 
-        /* Navigation */
+        /* Navigation Dots */
         .nav {
             position: fixed;
             right: 40px;
@@ -1004,22 +1040,13 @@
         }
 
         /* --- RESPONSIVE DESIGN ADDITIONS --- */
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 10px 5px;
-            height: auto;
-        }
-        nav a {
-            margin: 5px 8px;
-            font-size: 0.9rem;
-        }
-        .section-subtitle {
-            padding: 0 15px;
-        }
-
+        
+        /* Adjustments for medium screens (Tablets/Laptops) */
         @media (max-width: 1024px) {
+            .nav-space { height: 65px; } /* Adjust for nav wrapping */
+            .page {
+                padding: 100px 25px 50px 25px;
+            }
             .hero-metrics {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 25px;
@@ -1034,18 +1061,30 @@
             .results-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .segment-cards, .learning-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
         }
 
+        /* Adjustments for small screens (Mobile) */
         @media (max-width: 768px) {
             /* Global fixes */
+            .nav-space { height: 75px; } /* Ensure space for two-line mobile nav */
             .page {
-                padding: 80px 15px 40px;
+                padding: 100px 15px 40px;
             }
             .nav {
                 display: none; /* Hide dots on mobile for better screen use */
             }
-            .channel-audit-card, .test-card, .learning-card, .result-card {
-                padding: 30px;
+            .alias-badge {
+                right: 15px;
+                top: 80px; /* Move down due to wrapping nav */
+                padding: 8px 16px;
+                font-size: 0.75rem;
+            }
+            .section-subtitle {
+                padding: 0 5px;
             }
 
             /* Hero */
@@ -1054,7 +1093,7 @@
                 letter-spacing: -2px;
             }
             .hero .subtitle {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
             }
             .hero-metrics {
                 grid-template-columns: 1fr; /* Stack metrics */
@@ -1067,21 +1106,28 @@
             .chaos-grid {
                 grid-template-columns: 1fr; /* Stack chaos items */
             }
+            .before-state {
+                padding: 30px;
+            }
+            .state-title {
+                font-size: 1.8rem;
+            }
 
             /* Audit */
             .channel-cards {
                 grid-template-columns: 1fr; /* Stack audit cards */
                 gap: 25px;
             }
-            .metrics-row {
-                grid-template-columns: 1fr;
+            .channel-audit-card {
+                padding: 30px;
             }
             .channel-header {
                 flex-direction: column;
                 text-align: center;
+                gap: 10px;
             }
             .channel-name {
-                font-size: 1.4rem;
+                font-size: 1.6rem;
             }
 
             /* Strategy */
@@ -1089,64 +1135,82 @@
             .rules-grid,
             .touchpoint-grid {
                 grid-template-columns: 1fr; /* Stack principles, rules, and touchpoints */
-                gap: 25px;
+                gap: 20px;
             }
             .rule-card, .principle-card {
                 padding: 30px;
             }
+            .principle-title, .rule-title {
+                font-size: 1.4rem;
+            }
 
             /* Architecture */
+            .flow-stage {
+                padding: 30px 20px;
+            }
+            .stage-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
             .stage-title {
                 font-size: 1.8rem;
             }
-            .touchpoint-card {
-                padding: 20px;
-            }
 
-            /* Journey Visualization (Simplification for Mobile) */
+            /* Journey Visualization FIX */
             .journey-timeline {
-                overflow-x: auto; /* Enable horizontal scroll for long timeline */
-                padding-bottom: 20px;
+                width: 100%;
+                overflow: hidden; /* Prevent body horizontal scroll */
             }
             .timeline-track {
-                min-width: 600px; /* Ensure space for day markers */
-            }
-            .timeline-line {
-                left: 20px;
-                right: 20px;
-            }
-            .timeline-days {
-                padding: 0 20px;
+                display: none; /* Hide the main horizontal line and day markers which don't work well */
             }
             .journey-channels {
-                margin-top: 30px;
+                margin-top: 15px;
+            }
+            .channel-timeline {
+                padding: 20px;
+            }
+            .channel-timeline-name {
+                font-size: 1.3rem;
             }
             .channel-events {
-                flex-wrap: nowrap; /* Keep events in a horizontal timeline */
+                overflow-x: scroll; /* Enable horizontal scroll */
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 5px;
+                white-space: nowrap; /* Prevent events from wrapping */
+            }
+            .event-bubble {
+                min-width: 180px; /* Make sure bubbles are wide enough to read */
             }
 
             /* Tech Stack */
             .tech-tools {
                 grid-template-columns: 1fr;
             }
+            .tech-tool {
+                padding: 25px;
+            }
             .tech-category-title {
                 font-size: 1.4rem;
             }
 
             /* Personalization */
-            .segment-cards {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
             .segment-card {
                 padding: 30px;
             }
             .segment-header {
-                flex-direction: column;
-                text-align: center;
+                flex-direction: row;
+                text-align: left;
+                gap: 15px;
+            }
+            .segment-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
             }
             .segment-name {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
             }
             .logic-tree .tree-branches {
                 grid-template-columns: 1fr;
@@ -1179,28 +1243,30 @@
             .result-value {
                 font-size: 2.5rem;
             }
+            .result-card {
+                padding: 30px;
+            }
 
             /* Learnings */
             .learning-grid {
                 grid-template-columns: 1fr;
             }
-            .learning-title {
-                font-size: 1.5rem;
+            .learning-card {
+                padding: 30px;
             }
         }
     </style>
 </head>
 <body>
-    <nav style="position:fixed; top:0; width:100%; background:#222; color:#fff; padding:10px; z-index:100;">
-        <a href="index.html" style="color:#fff; margin-right:15px;">Home</a>
-        <a href="project.html" style="color:#fff; margin-right:15px;">Customer Journey</a>
-        <a href="multichannel.html" style="color:#fff; margin-right:15px;">Multi-channel</a>
-        <a href="onboarding.html" style="color:#fff; margin-right:15px;">Welcome Series Redesign</a>
-        <a href="positioning.html" style="color:#fff; margin-right:15px;">Positioning</a>
-        <!-- Add more links for each HTML file -->
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="project.html">Customer Journey</a>
+      <a href="multichannel.html">Multi-channel</a>
+      <a href="onboarding.html">Welcome Series Redesign</a>
+      <a href="positioning.html">Positioning</a>
     </nav>
-    <div style="height:40px;"></div> <!-- Adds space so content is not hidden under the navbar -->
-    
+    <div class="nav-space"></div>
+
     <div class="alias-badge">*All data uses aliases</div>
 
     <!-- Navigation -->
@@ -1220,7 +1286,7 @@
     <!-- Hero -->
     <div class="page hero">
         <h1>Multi-Channel<br>Orchestration</h1>
-        <p class="subtitle">Building a unified, intelligent lifecycle marketing engine across email, SMS, in-app, push, and direct mail for Momentum Commerce — driving 267% increase in customer engagement</p>
+        <p class="subtitle">Building a unified, intelligent lifecycle marketing engine across email, SMS, in-app, push, and direct mail for Momentum Commerce — driving **267% increase in customer engagement**</p>
         
         <div class="hero-metrics">
             <div class="hero-metric">
@@ -1784,7 +1850,7 @@
         <h2 class="section-title">30-Day Customer Journey View</h2>
         <p class="section-subtitle">
             Here's what a coordinated multi-channel experience looks like for a single customer over 30 days. 
-            Notice the spacing, variety, and strategic escalation across channels.
+            **Scroll horizontally** below to see the event timeline for each channel.
         </p>
 
         <div class="journey-timeline">
